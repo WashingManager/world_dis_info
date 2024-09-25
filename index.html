@@ -378,6 +378,23 @@
         .lazy-load.loaded {
             opacity: 1;
         }
+		.footer-background {
+		  position: relative;
+		}
+
+		.footer-background::before {
+		  content: "";
+		  background-image: url('images/light.png');
+		  background-size: cover;
+		  background-position: center;
+		  opacity: 0.2;  /* 이 값을 조절하여 이미지의 투명도를 변경할 수 있습니다 */
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  z-index: -1;
+		}
 
     </style>
 </head>
@@ -498,7 +515,7 @@
     </div>
 
     <footer id="footer">
-        <div class="container footer-content">
+        <div class="container footer-content footer-background">
             <div class="footer-section">
                 <h3>정보담당자</h3>
                 <ul>
