@@ -321,7 +321,50 @@
             src: url(https://fonts.gstatic.com/s/notosanskr/v13/PbykFmXiEBPT4ITbgNA5Cgm203Tq4JJWq209pU0DPdWuqxJFA4GNDCBYtw.0.woff2) format('woff2');
             unicode-range: U+f9ca-fa0b, U+ff03-ff05, U+ff07, U+ff0a-ff0b, U+ff0d-ff19, U+ff1b, U+ff1d, U+ff20-ff5b, U+ff5d, U+ffe0-ffe3, U+ffe5-ffe6;
         }
+		
+		.info-item {
+		  position: relative;
+		  overflow: hidden;
+		  transition: all 0.3s ease;
+		}
 
+		.info-item::before {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-size: cover;
+		  background-position: center;
+		  opacity: 0.5;
+		  filter: blur(5px);
+		  transition: all 0.3s ease;
+		  z-index: -1;
+		}
+
+		.war-bg::before {
+		  background-image: url('images/war.jpg');
+		}
+
+		.situation-bg::before {
+		  background-image: url('images/situation.jpg');
+		}
+
+		.disaster-bg::before {
+		  background-image: url('images/disaster.jpg');
+		}
+
+		.info-item:hover::before {
+		  opacity: 0.8;
+		  filter: blur(1.2px);
+		}
+
+		.info-item * {
+		  position: relative;
+		  z-index: 1;
+		}
+			
         img {
             max-width: 100%;
             height: auto;
@@ -356,7 +399,7 @@
             <section class="section" aria-labelledby="channel-intro">
                 <h2 id="channel-intro">채널 소개</h2>
                 <p>우리 방의 대원칙은 <strong>상대존중</strong> 입니다.</p>
-                <p>상대존중은 표면적 대화체 뿐 아니라 보이지 않는 태도와 마음까지 아우릅니다.</p>
+                <p>상대존중은 표면적 대화체 뿐 아니라 상대를 대하는 태도와 보이지 않는 마음까지 아우릅니다.</p>
             </section>
 
             <section class="section" aria-labelledby="chat-rules">
@@ -364,8 +407,8 @@
                 <ul>
                     <li>대화체는 문장 마침이 되는 형태와 존댓말 사용을 기본으로 합니다.</li>
                     <li>음슴체는 정보를 간추려 전할 때 사용합니다.</li>
-                    <li>독백체, 말줄임체 사용으로 인한 오해 발생 시 책임은 본인에게 있습니다.</li>
-                    <li>방주제 특성상 비상시 인원 유입이 많아집니다. 혼잡도에 따라 끊어쓰기 자제를 권장합니다.</li>
+                    <li>독백체, 말줄임체 사용으로 인한 오해나 문제 발생 시 책임은 본인에게 있습니다.</li>
+                    <li>방주제 특성상 비상 시 인원 유입이 많아집니다. 혼잡도에 따라 끊어쓰기 자제를 권장합니다.</li>
                 </ul>
             </section>
 
@@ -380,7 +423,7 @@
             <div class="section" role="region" aria-labelledby="info-topics">
 				<h2 id="info-topics">다루는 정보</h2>
 				<div class="info-category">
-					<div class="info-item" role="region" aria-labelledby="world-war">
+					<div class="info-item war-bg" role="region" aria-labelledby="world-war">
 						<h3 id="world-war">세계전쟁</h3>
 						<ul>
 							<li>진행중인 전쟁</li>
@@ -391,7 +434,7 @@
 							<li>전쟁 관련 소재</li>
 						</ul>
 					</div>
-					<div class="info-item" role="region" aria-labelledby="global-situation">
+					<div class="info-item situation-bg" role="region" aria-labelledby="global-situation">
 						<h3 id="global-situation">세계정세</h3>
 						<ul>
 							<li>국제 갈등 및 분쟁</li>
@@ -401,7 +444,7 @@
 							<li>정세 관련 소재</li>
 						</ul>
 					</div>
-					<div class="info-item" role="region" aria-labelledby="global-disasters">
+					<div class="info-item disaster-bg" role="region" aria-labelledby="global-disasters">
 						<h3 id="global-disasters">세계재난</h3>
 						<ul>
 							<li>자연재해 (지진, 화산, 태풍 등)</li>
@@ -537,7 +580,7 @@
             fadeInObserver.observe(section);
         });
     });
-
+		
 		document.addEventListener("DOMContentLoaded", function() {
 			var lazyImages = [].slice.call(document.querySelectorAll("img.lazy-load"));
 
