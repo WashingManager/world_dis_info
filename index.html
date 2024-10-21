@@ -395,7 +395,44 @@
 		  bottom: 0;
 		  z-index: -1;
 		}
+		.custom-link {
+			color: #2c4a7c;
+			text-decoration: none;
+			padding: 2px 4px;
+			border-radius: 3px;
+			transition: background-color 0.3s ease;
+		}
 
+		.custom-link:hover {
+			background-color: rgba(44, 74, 124, 0.1);
+		}
+		.button-container {
+			text-align: center; /* 버튼을 중앙 정렬 */
+			margin-top: 15px; /* 버튼과 위 요소 간의 간격 */
+		}
+		.details-button {
+			background-color: var(--navy);
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			margin-top: 15px;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		.details-button:hover {
+			color: var(--gold);
+			text-shadow: 0 0 5px var(--gold);
+			background-color: var(--light-navy);
+		}
+
+		.button-container {
+			text-align: center;
+			margin-top: 15px;
+		}
     </style>
 </head>
 <body>
@@ -414,13 +451,21 @@
     <main role="main">
         <div class="container">
             <section class="section" aria-labelledby="channel-intro">
-                <h2 id="channel-intro">채널 소개</h2>
-                <p>우리 방의 대원칙은 <strong>상대존중</strong> 입니다.</p>
-                <p>상대존중은 표면적 대화체 뿐 아니라 상대를 대하는 태도와 보이지 않는 마음까지 아우릅니다.</p>
-            </section>
+				<h2 id="channel-intro">채널 소개</h2>
+				<p>우리는 카카오톡 오픈채팅방과 정보아카이브(카페)를 운영중입니다.</p>
+				<p><a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1(카톡 정보방)</a>은 <strong>정보 공유</strong>전용이고,</p>
+				<p><a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2(카톡 대화방)</a>은 <strong>대화</strong>목적으로 활용합니다.</p>
+				<p><a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보(카페)</a>는 정세와 재난 관련 키워드를 통한 기사만 선별하여 업로드 중인 아카이브입니다.</p>
+				<div class="button-container">
+        <div class="button-container">
+			<button class="details-button" onclick="scrollToFooter()">운영중인 채널</button>
+		</div>
+			</section>
 
             <section class="section" aria-labelledby="chat-rules">
                 <h2 id="chat-rules">대화방 활동</h2>
+                <p>우리 방의 대원칙은 <strong>상대존중</strong> 입니다.</p>
+                <p>상대존중은 표면적 대화체 뿐 아니라 상대를 대하는 태도와 보이지 않는 마음까지 아우릅니다.</p>
                 <ul>
                     <li>대화체는 문장 마침이 되는 형태와 존댓말 사용을 기본으로 합니다.</li>
                     <li>음슴체는 정보를 간추려 전할 때 사용합니다.</li>
@@ -431,7 +476,7 @@
 
             <section class="section" aria-labelledby="nickname-rules">
                 <h2 id="nickname-rules">개별닉네임</h2>
-                <p>중복되지 않는 개별닉네임으로 변경 후 활동 바랍니다.</p>
+                <p>미중복 개별닉네임으로 변경 후 (1, 2방 동일닉네임)활동 가능합니다.</p>
                 <h3 id="nickname-change">닉네임 변경방법</h3>
                 <p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
                 <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>
@@ -510,9 +555,14 @@
 					</ul>
 				</div>
         </div>
-
+		<div class="button-container">
+		<button class="details-button" onclick="scrollToTop()">처음으로 가기</button>
+		</div><br>
         <div id="current-time"></div>
     </div>
+	
+</body>
+
 
     <footer id="footer">
         <div class="container footer-content footer-background">
@@ -531,10 +581,10 @@
             <div class="footer-section">
                 <h3>함께 운영중인 채널</h3>
                 <ul>
-                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보(1정보방)</a></li>
-					<li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보(2대화방)</a></li>
+                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보 1(카톡 정보방)</a></li>
+					<li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2(카톡 대화방)</a></li>
 				    <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보(카페)</a></li>
-					<li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(요약 시트)</a></li>
+					<li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(뉴스 시트)</a></li>
 					<li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li>
                     <li><a href="https://bit.ly/DisInfoTalkCafe" target="_blank">세계정세 재난정보대화방 (카페,멤버가능)</a></li>
                 </ul>
@@ -553,6 +603,27 @@
     </footer>
 
     <script>
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
+
+	function scrollToFooter() {
+		const footer = document.querySelector('footer');
+		footer.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	// 스크롤 이벤트 리스너 추가
+	window.addEventListener('scroll', function() {
+		var backToTopButton = document.getElementById('back-to-top');
+		if (window.pageYOffset > 300) { // 300px 이상 스크롤되면 버튼 표시
+			backToTopButton.style.display = 'block';
+		} else {
+			backToTopButton.style.display = 'none';
+		}
+	});
     // 현재 시간 표시
 		function updateTime() {
 			const now = new Date();
@@ -702,6 +773,10 @@
 					}, 300);
 				});
 			});
+		}
+		function scrollToFooter() {
+			const footer = document.querySelector('footer');
+			footer.scrollIntoView({ behavior: 'smooth' });
 		}
 </script>
 </html>
