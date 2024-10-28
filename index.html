@@ -449,6 +449,46 @@
 		.text-red { color: #c53929; }
 		.bg-light-orange { background-color: #fce5cd; }
 		.bg-light-purple { background-color: #d9d2e9; }
+		
+		/* 모달 기본 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+			z-index: 1000;
+        }
+
+        /* 모달 내용 스타일 */
+        .modal-content {
+			position: relative;
+			background-color: white;
+			margin: 5% auto; /* 상단 여백을 줄임 */
+			padding: 20px;
+			width: 90%; /* 너비를 늘림 */
+			max-width: 550px; /* 최대 너비를 늘림 */
+			height: 840px;  /* 90vh; 높이를 뷰포트의 90%로 설정 */
+			overflow: auto; /* 내용이 넘칠 경우 스크롤 추가 */
+			z-index: 1000;
+		}
+		.modal iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+        /* 닫기 버튼 스타일 */
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 24px;
+            cursor: pointer;
+			z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -496,6 +536,14 @@
                     <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 대응매뉴얼대로 운영합니다.</span></p>				
             </section>
 
+			<!-- 모달 컨테이너 -->
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<span class="close" onclick="closeModal()">&times;</span>
+						<iframe id="modalIframe"></iframe>
+					</div>
+				</div>
+
             <section class="section" aria-labelledby="nickname-rules">
                 <h2 id="nickname-rules">허용되는 닉네임</h2>
                 <p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)합니다.</span></p>
@@ -505,8 +553,11 @@
 				 <li>발음할 수 없는 형태 <span class="bg-light-orange">예)ㄱ(초성), .(점), 특수기호 등 </span></li>
 				 <li><p class="bg-very-light-green">영어 외 외국어 사용 시 한국어도 함께 표기 예)οὐρανός(우라노스) </span></li>
                 <h3 id="nickname-change">닉네임 변경방법</h3>
-                <p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
-                <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>
+				<div class="button-container">
+					<button class="details-button" onclick="openModal()">변경방법 보기</button>
+				</div> 
+                <!--<p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
+                <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>-->
             </section>
 
             <div class="section" role="region" aria-labelledby="info-topics">
@@ -813,6 +864,37 @@
 		function scrollToFooter() {
 			const footer = document.querySelector('footer');
 			footer.scrollIntoView({ behavior: 'smooth' });
+		}
+		function openModal() {
+			let modal = document.getElementById('myModal');
+			let iframe = document.getElementById('modalIframe');
+			
+			modal.style.display = 'block';
+			iframe.src = 'kakaoNickIntro.html';
+		}
+
+		function closeModal() {
+			let modal = document.getElementById('myModal');
+			let iframe = document.getElementById('modalIframe');
+			
+			// 모달 내용을 즉시 숨김
+			modal.style.opacity = '0';
+			modal.style.transition = 'opacity 0.5s';
+			
+			// 2초 후에 모달을 완전히 닫고 iframe 소스를 지움
+			setTimeout(() => {
+				modal.style.display = 'none';
+				iframe.src = '';
+				modal.style.opacity = '1'; // 다음 열림을 위해 불투명도 초기화
+			}, 2000);
+		}
+
+		// 모달 외부 클릭시 닫기
+		window.onclick = function(event) {
+			let modal = document.getElementById('myModal');
+			if (event.target == modal) {
+				closeModal();
+			}
 		}
 </script>
 </html>
