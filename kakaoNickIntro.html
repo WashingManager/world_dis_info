@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오톡 닉네임 변경 가이드</title>
+    <style>
+	
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FAE100;
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+        }
+
+        .phone-container {
+            width: 320px;
+            height: 640px;
+            background-color: white;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 상단 상태바 스타일 */
+        .status-bar {
+            height: 44px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            position: relative;
+            justify-content: space-between; /* 양쪽 정렬을 위해 추가 */
+        }
+		/* 채팅방 이름 스타일 */
+		.header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px; /* 버튼 사이의 간격을 일정하게 조정 */
+            margin-left: auto; /* 우측 정렬 */
+        }
+
+        .search-button {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>') no-repeat center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .more-button {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* 점들을 중앙 정렬 */
+            gap: 4px;
+            padding: 4px;
+        }
+        .more-dot {
+            width: 16px;
+            height: 2px;
+            background-color: #000;
+            border-radius: 1px;
+        }
+		
+		.chat-container {
+			flex-grow: 1;
+			overflow-y: auto;
+			padding: 10px;
+			background-color: #f0f0f0;
+		}
+
+		.message-container {
+			display: flex;
+			align-items: flex-start
+			margin-bottom: 15px;
+			opacity: 0;
+			transform: translateY(20px);
+			transition: opacity 0.5s, transform 0.5s;
+		}
+		
+		.message-container.show {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.author-image {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			margin-right: 8px;
+			object-fit: cover;
+			margin-top: -5px;  /* 추가: 이미지를 위로 살짝 올림 */
+		}
+
+		.message {
+			position: relative;  /* 추가: 말풍선 꼬리 위치 지정을 위해 */
+			max-width: calc(70% - 40px);  /* 이미지 너비를 고려하여 조정 */
+			padding: 10px;
+			border-radius: 20px;
+			font-size: 14px;
+		}
+
+		.received {
+			background-color: #fff;
+			border-top-left-radius: 0;  /* 변경: 왼쪽 위 모서리를 뾰족하게 */
+		}
+		.received::before {  /* 추가: 말풍선 꼬리 */
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -10px;
+			width: 0;
+			height: 0;
+			border-top: 10px solid #fff;
+			border-left: 10px solid transparent;
+		}
+
+		.sent {
+			background-color: #dcf8c6;
+			border-bottom-right-radius: 0;
+			margin-left: auto;
+		}
+
+
+		<!--
+		@keyframes slideDown {
+			0% {
+				top: -50px;
+				opacity: 0;
+			}
+			70% {
+				top: 25px; /* 약간 더 내려가게 설정 */
+			}
+			100% {
+				top: 20px;
+				opacity: 1;
+			}
+		}-->
+		
+		@keyframes slideDown {
+			0% {
+				transform: translate(-50%, -100%);
+			}
+			70% {
+				transform: translate(-50%, 10px);
+			}
+			100% {
+				transform: translate(-50%, 0);
+			}
+		}
+		.step-indicator.show {
+			animation: slideDown 0.5s ease-out forwards;
+		}
+
+		.input-area {
+			display: flex;
+			padding: 10px;
+			background-color: #fff;
+			border-top: 1px solid #ddd;
+		}
+
+		.input-area input {
+			flex-grow: 1;
+			border: none;
+			border-radius: 20px;
+			padding: 10px;
+			margin-right: 10px;
+			font-size: 14px;
+		}
+
+		.input-area button {
+			background-color: #075e54;
+			color: white;
+			border: none;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+		
+        .profile-list {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+		.profile-user {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .profile-me {
+			width: 14px;
+			height: 14px;
+			background-color: #555; /* 어두운 회색 */
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 3px;
+			font-size: 7px;
+			font-weight: bold; /* 글씨를 굵게 설정 */
+			color: white; /* 글자 색상을 흰색으로 설정 */
+		}
+
+		.profile-circle {
+            width: 24px;
+            height: 24px;
+            background-color: #eee;
+            border-radius: 43%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+		
+        .profile-name {
+            flex-grow: 1;
+        }
+
+        .profile-change {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+			min-height: 600px; /* 최소 높이 설정 */
+            width: 280px;
+            background-color: white;
+            border-radius: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .profile-management {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+			min-height: 600px; /* 최소 높이 설정 */
+            width: 280px;
+            background-color: white;
+            border-radius: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .profile-selection {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+			min-height: 600px; /* 최소 높이 설정 */
+            width: 280px;
+            background-color: white;
+            border-radius: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .profile-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .profile-option-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #ddd;
+            border-radius: 40%;
+            margin-right: 15px;
+        }
+
+
+        .profile-divider {
+            width: 100%;
+            height: 1px;
+            background-color: #eee;
+            margin: 15px 0;
+        }
+
+        .profile-underline {
+            width: 100%;
+            height: 1px;
+            background-color: #eee;
+            margin: 0 0;
+        }
+
+        .edit-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>') no-repeat center;
+        }
+
+        .edit-text {
+            font-size: 14px;
+            color: #666;
+        }
+		
+		
+        .arrow {
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .highlight {
+            background-color: #FAE100 !important;
+        }
+		
+		.edit-button {
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>') no-repeat center;
+        }
+		
+        .cursor {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 0, 0, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .click-effect {
+            animation: click 0.5s ease;
+        }
+
+        @keyframes click {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+		<!--
+        .step-indicator {
+			position: fixed;
+			top: -50px; /* 시작 위치를 화면 위로 설정 */
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #333;
+			color: white;
+			padding: 10px 20px;
+			border-radius: 20px;
+			font-size: 14px;
+			z-index: 1001;
+			opacity: 0; /* 초기에는 보이지 않게 설정 */
+		}-->
+		
+		.step-indicator {
+			position: fixed;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #333;
+			color: white;
+			padding: 10px 20px;
+			border-radius: 20px;
+			font-size: 14px;
+			z-index: 1001;
+			opacity: 1;
+			transition: opacity 0.3s ease-out;
+		}
+
+		/* profile-management에서 profile-circle을 profile-name 위에 크고 중앙으로 배치 */
+		.profile-management .profile-circle {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            background-color: #ddd;
+            font-size: 0;
+        }
+       .profile-management .profile-item {
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .profile-management .profile-name {
+            font-size: 18px;
+            flex-grow: 0;
+            margin-top: 10px;
+        }
+		.nickname {
+            font-size: 24px;
+            margin: 20px 0;
+            min-height: 36px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .nickname::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 24px;
+            background-color: #000;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+		
+		.complete-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 5px 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.complete-button.disabled {
+			color: #b3b3b5;
+			pointer-events: none;
+		}
+
+		.complete-button.active {
+			color: #000;
+		}
+
+		.profile-option-circle, .profile-circle {
+			width: 40px;
+			height: 40px;
+			background-color: #ddd;
+			background-size: cover;
+			background-position: center;
+			border-radius: 40%;
+			margin-right: 15px;
+		}
+
+		.muzi-profile {
+			background-image: url('images/helloMuzi.png');
+		}
+
+		.manager-profile {
+			background-image: url('images/CleanManager.jpeg');
+		}
+		
+		.sky-profile {
+			background-image: url('images/sky.jpg');
+		}
+	
+		/* profile-management의 프로필 이미지 크기 조정 */
+		.profile-management .profile-circle {
+			width: 70px;
+			height: 70px;
+		}
+
+		/* 필요한 경우 profile-change의 프로필 이미지도 조정 */
+		#profilechange .profile-circle {
+			width: 70px;
+			height: 70px;
+		}
+		
+
+
+    </style>
+</head>
+<body>
+    <div class="step-indicator" id="stepIndicator" style="display: none;">Step 1: 더보기 버튼 터치</div>
+    <div class="cursor" id="cursor"></div>
+    
+    <div class="phone-container">
+		<div class="status-bar">
+			<div class="header-title">세계정세 재난정보</div>
+			<div class="header-actions">
+				<div class="search-button"></div>
+				<div class="more-button" id="moreButton">
+					<div class="more-dot"></div>
+					<div class="more-dot"></div>
+					<div class="more-dot"></div>
+				</div>
+			</div>
+		</div>
+		<div class="chat-container">
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div class="message-container" style="display: none;">
+			<img src="images/CleanManager.jpeg" alt="Clean Manager" class="author-image">
+			<div class="message received">
+				<h3>잘 오셨습니다.</h3>
+				<p>닉네임 변경방법을 안내해드리겠습니다.</p>
+			</div>
+			<!-- 여기에 더 많은 메시지를 추가할 수 있습니다 -->
+		</div>
+	
+        <div class="profile-selection" id="profileList" style="display: none;">
+            <div class="profile-item" id="myProfile">
+                <div class="profile-option-circle muzi-profile" ></div>
+                <div class="profile-me">나</div>
+                <div class="profile-name">인사하는 무지</div>
+            </div>
+            <div class="profile-item">
+                <div class="profile-option-circle manager-profile"></div>
+                <div class="profile-name">청소부장</div>
+            </div>            
+        </div>
+
+
+    <div class="profile-management" id="profileManagement">
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="profile-item">
+            <div class="profile-circle muzi-profile"></div>
+            <div class="profile-name">인사하는 무지</div>
+        </div>
+        <div class="profile-divider"></div>
+        <div class="edit-profile" id="editProfile">
+		<br>
+            <div class="edit-button"></div>
+            <div class="edit-text">프로필 관리</div>
+        </div>
+    </div>
+
+    <div class="profile-selection" id="profileSelection">
+        <div class="profile-option" id="profileBasic">
+            <div class="profile-option-circle"></div>
+            <div class="profile-option-name">오픈프로필1</div>
+        </div>
+        <div class="profile-option" id="profileBasic">
+            <div class="profile-option-circle"></div>
+            <div class="profile-option-name">오픈프로필2</div>
+        </div>		
+        <div class="profile-option" id="profileCustom">
+            <div class="profile-option-circle muzi-profile"></div>
+            <div class="profile-option-name">인사하는 무지</div>
+            <div class="arrow">></div>
+        </div>
+    </div>
+	
+	<div class="profile-management" id="profilechange">
+        <div class="profile-item">
+			<div class="complete-button">완료</div>
+            <div class="profile-circle muzi-profile"></div>
+            <div class="nickname">인사하는 무지</div>
+			<div class="profile-underline"></div>
+        </div>
+    </div>
+	
+	<div class="profile-management" id="profileManagement">
+        <div class="profile-item">
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="profile-circle sky-profile"></div>
+            <div class="profile-name">하늘</div>
+        </div>
+        <div class="profile-divider"></div>
+        <div class="edit-profile" id="editProfile">
+            <div class="edit-button"></div>
+            <div class="edit-text">프로필 관리</div>
+        </div>
+    </div>
+	
+</div>
+	
+    <script>
+        const cursor = document.getElementById('cursor');
+        const stepIndicator = document.getElementById('stepIndicator');
+        const moreButton = document.getElementById('moreButton');
+        const profileList = document.getElementById('profileList');
+        const myProfile = document.getElementById('myProfile');
+        const editProfile = document.getElementById('editProfile');
+        const profileManagement = document.getElementById('profileManagement');
+        const profileSelection = document.getElementById('profileSelection');
+        const profileCustom = document.getElementById('profileCustom');
+		const delay = ms => new Promise(resolve => setTimeout(resolve, ms));	
+		
+        function moveCursor(element, offsetX = 0, offsetY = 0) {
+            const rect = element.getBoundingClientRect();
+            cursor.style.left = (rect.left + offsetX) + 'px';
+            cursor.style.top = (rect.top + offsetY) + 'px';
+        }
+
+        async function animateClick() {
+            cursor.classList.add('click-effect');
+            await new Promise(resolve => setTimeout(resolve, 500));
+            cursor.classList.remove('click-effect');
+        }
+		
+		const profilechange = document.getElementById('profilechange');
+		
+		async function animateNickname() {
+			const oldNickname = "인사하는 무지";
+			const newNickname = "하늘";
+			const nicknameElement = document.querySelector('#profilechange .nickname');
+			const completeButton = document.querySelector('#profilechange .complete-button');
+			
+			if (!nicknameElement || !completeButton) {
+				console.error('요소를 찾을 수 없습니다.');
+				return;
+			}
+
+			completeButton.classList.add('disabled');
+
+			// 원래 닉네임 한 글자씩 지우기
+			for (let i = oldNickname.length; i >= 0; i--) {
+				nicknameElement.textContent = oldNickname.substring(0, i);
+				if (i < oldNickname.length) {
+					completeButton.classList.remove('disabled');
+					completeButton.classList.add('active');
+				}
+				await new Promise(resolve => setTimeout(resolve, 150));
+			}
+			
+			await new Promise(resolve => setTimeout(resolve, 300)); // 잠시 대기
+			
+			// 새 닉네임 한 글자씩 타이핑
+			for (let i = 0; i <= newNickname.length; i++) {
+				nicknameElement.textContent = newNickname.substring(0, i);
+				await new Promise(resolve => setTimeout(resolve, 150));
+			}
+
+			// 완료 버튼 클릭 애니메이션
+			await new Promise(resolve => setTimeout(resolve, 300));
+			
+			// 마우스 커서를 완료 버튼으로 이동
+			moveCursor(completeButton, completeButton.offsetWidth / 2, completeButton.offsetHeight / 2);
+			
+			await new Promise(resolve => setTimeout(resolve, 500)); // 마우스 이동 대기
+			
+			// 클릭 애니메이션
+			await animateClick();
+			
+			completeButton.classList.add('click-effect');
+			await new Promise(resolve => setTimeout(resolve, 300));
+			completeButton.classList.remove('click-effect');
+		}
+		
+			
+		function updateStepIndicator(text) {
+			const stepIndicator = document.getElementById('stepIndicator');
+			stepIndicator.style.opacity = '0';
+			
+			setTimeout(() => {
+				stepIndicator.textContent = text;
+				stepIndicator.classList.remove('animate');
+				void stepIndicator.offsetWidth; // 리플로우 강제 실행
+				stepIndicator.classList.add('animate');
+				stepIndicator.style.opacity = '1';
+			}, 300);
+		}
+
+        async function startAnimation() {
+		
+			// 메시지 컨테이너 표시
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			const messageContainer = document.querySelector('.message-container');
+			messageContainer.style.display = 'flex';
+			messageContainer.classList.add('show');
+
+			// Step Indicator 표시
+			await new Promise(resolve => setTimeout(resolve, 2000));
+			const stepIndicator = document.getElementById('stepIndicator');
+			stepIndicator.style.display = 'block';
+			stepIndicator.classList.add('show');
+
+
+			// Step 1: 더보기 버튼
+			await new Promise(resolve => setTimeout(resolve, 2000));
+			moveCursor(moreButton, 12, 12);
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			await animateClick();
+			profileList.style.display = 'block';
+			
+			// Step 2: 프로필 선택
+			updateStepIndicator('Step 2: 변경하려는 프로필 선택');
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			moveCursor(myProfile, 100, 20);
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			await animateClick();
+			myProfile.classList.add('highlight');
+			profileList.style.display = 'none';  // Step 1 창 닫기
+			profileManagement.style.display = 'block';
+			
+			// Step 3: 프로필 관리 버튼
+			updateStepIndicator('Step 3: 프로필 관리 버튼 터치');
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			// edit-button을 직접 타겟팅하여 위치 이동
+			moveCursor(editProfile.querySelector('.edit-button'), 12, 12);
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			await animateClick();
+			profileManagement.style.display = 'none';  // Step 2 창 닫기
+			profileSelection.style.display = 'block';
+
+			// Step 4: 프로필 선택
+			updateStepIndicator('Step 4: ">" 기호가 있는 프로필 터치');
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			moveCursor(profileCustom, 150, 30);
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			await animateClick();
+			profileSelection.style.display = 'none';  // Step 3 창 닫기
+
+			// Step 5: 닉네임 변경 애니메이션
+			updateStepIndicator('Step 5: 발음 가능한 미중복 닉네임 입력');
+			profilechange.style.display = 'block';
+			await new Promise(resolve => setTimeout(resolve, 1000));
+			await animateNickname();
+
+			// Step 6: 변경된 프로필 표시
+			updateStepIndicator('닉네임 변경이 완료되었습니다!');
+			profilechange.style.display = 'none';
+			profileManagement.style.display = 'block';
+			
+			// 변경된 닉네임 반영
+			const updatedProfileName = document.querySelector('#profileManagement .profile-name');
+			if (updatedProfileName) {
+				updatedProfileName.textContent = "하늘";
+			}
+
+			// 변경된 프로필 이미지 반영
+			const updatedProfileImage = document.querySelector('#profileManagement .profile-circle');
+			if (updatedProfileImage) {
+				updatedProfileImage.classList.remove('muzi-profile'); // 기존 클래스 제거
+				updatedProfileImage.classList.add('sky-profile'); // 새로운 클래스 추가
+			}
+
+			await new Promise(resolve => setTimeout(resolve, 3000));
+
+			// 완료 메시지
+			updateStepIndicator('[입장즉시] 변경해주세요');
+		}
+
+        window.onload = startAnimation;
+    </script>
+</body>
+</html>
