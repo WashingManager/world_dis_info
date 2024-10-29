@@ -461,7 +461,7 @@
             background-color: rgba(0,0,0,0.5);
 			z-index: 1000;
         }
-
+		<!--
         /* 모달 내용 스타일 */
         .modal-content {
 			position: relative;
@@ -488,7 +488,49 @@
             font-size: 24px;
             cursor: pointer;
 			z-index: 1000;
-        }
+        }-->
+		
+		/* 모달 내용 스타일 */
+		.modal-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: white;
+			overflow: auto;
+			z-index: 1001;
+		}
+
+		.modal iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+		/* 닫기 버튼 스타일 */
+		.close {
+			position: absolute;
+			right: 20px;
+			top: 20px;
+			font-size: 30px;
+			cursor: pointer;
+			z-index: 1002;
+			color: #333;
+		}
+
+		/* 모바일 기기를 위한 미디어 쿼리 */
+		@media screen and (max-width: 768px) {
+			.modal-content {
+				padding: 0;
+			}
+
+			.close {
+				right: 10px;
+				top: 10px;
+			}
+		}
+				
     </style>
 </head>
 <body>
