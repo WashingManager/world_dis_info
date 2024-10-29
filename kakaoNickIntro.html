@@ -509,7 +509,44 @@
 			width: 70px;
 			height: 70px;
 		}
-		
+		.heart-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			cursor: pointer;
+			padding: 8px;
+			border-radius: 20px;
+			background-color: #f8f8f8;
+			transition: transform 0.2s;
+		}
+
+		.heart-icon {
+			fill: #ddd;
+			transition: fill 0.3s, transform 0.3s;
+		}
+
+		.heart-icon.active {
+			fill: #FF4B4B;
+			animation: heartBeat 0.3s ease-in-out;
+		}
+
+		.heart-count {
+			font-size: 14px;
+			color: #666;
+		}
+
+		@keyframes heartBeat {
+			0% { transform: scale(1); }
+			50% { transform: scale(1.2); }
+			100% { transform: scale(1); }
+		}
+
+		.heart-button:hover {
+			transform: scale(1.05);
+		}
 
 
     </style>
@@ -542,15 +579,21 @@
 		</div>
 	
         <div class="profile-selection" id="profileList" style="display: none;">
-            <div class="profile-item" id="myProfile">
-                <div class="profile-option-circle muzi-profile" ></div>
-                <div class="profile-me">나</div>
-                <div class="profile-name">인사하는 무지</div>
-            </div>
-            <div class="profile-item">
-                <div class="profile-option-circle manager-profile"></div>
-                <div class="profile-name">청소부장</div>
-            </div>            
+			<div class="heart-button" id="heartButton">
+				<svg class="heart-icon" viewBox="0 0 24 24" width="24" height="24">
+					<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+				</svg>
+				<span class="heart-count">0</span>
+			</div>
+			<div class="profile-item" id="myProfile">
+				<div class="profile-option-circle muzi-profile" ></div>
+				<div class="profile-me">나</div>
+				<div class="profile-name">인사하는 무지</div>
+			</div>
+			<div class="profile-item">
+				<div class="profile-option-circle manager-profile"></div>
+				<div class="profile-name">청소부장</div>
+			</div>            
         </div>
 
 
@@ -717,6 +760,41 @@
 			await animateClick();
 			profileList.style.display = 'block';
 			
+			// 하트 버튼 누르기
+			
+			updateStepIndicator('방 추천을 위한 하트 누르기');
+			const heartButton = document.getElementById('heartButton');
+			const heartIcon = heartButton.querySelector('.heart-icon');
+			const heartCount = heartButton.querySelector('.heart-count');
+			let count = 0;
+			let isLiked = false;
+
+			async function handleHeartClick() {
+				isLiked = !isLiked;
+				count = isLiked ? count + 1 : count - 1;
+				heartCount.textContent = count;
+				heartIcon.classList.toggle('active');
+			}
+
+			// startAnimation 함수 내에 추가 (profileList가 표시된 후에)
+			async function animateHeartButton() {
+				// 하트 버튼으로 커서 이동
+				moveCursor(heartButton, heartButton.offsetWidth / 2, heartButton.offsetHeight / 2);
+				await delay(1000);
+				
+				// 클릭 애니메이션
+				await animateClick();
+				handleHeartClick();
+				
+				// 잠시 대기 후 다음 단계로
+				await delay(1000);
+			}
+
+			// startAnimation 함수 내에서 profileList 표시 후에 추가
+			profileList.style.display = 'block';
+			await animateHeartButton(); // 하트 버튼 애니메이션 실행
+			
+			
 			// Step 2: 프로필 선택
 			updateStepIndicator('Step 2: 변경하려는 프로필 선택');
 			await new Promise(resolve => setTimeout(resolve, 1000));
@@ -726,6 +804,8 @@
 			myProfile.classList.add('highlight');
 			profileList.style.display = 'none';  // Step 1 창 닫기
 			profileManagement.style.display = 'block';
+			
+			
 			
 			// Step 3: 프로필 관리 버튼
 			updateStepIndicator('Step 3: 프로필 관리 버튼 터치');
