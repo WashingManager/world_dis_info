@@ -65,13 +65,21 @@
 			0%, 100% { color: #fff; text-shadow: none; }
 			50% { color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b; }
 		}
-
+		
+		@keyframes ColorChange {
+			0%, 100% { color: #333; }
+			50% { color: #c53929; } /* 중간 색상으로 변경 */
+		}
+		
 		.title-part1 {
 			animation: blueShine 4s infinite;
 		}
 
 		.title-part2 {
 			animation: whiteShine 4s infinite 2s;
+		}
+		.subtitle-part1 {
+			animation: ColorChange 4s infinite 1.8s;
 		}
 
 		@keyframes cloudFireAnimation {
@@ -395,7 +403,134 @@
 		  bottom: 0;
 		  z-index: -1;
 		}
+		.custom-link {
+			color: #2c4a7c;
+			text-decoration: none;
+			padding: 2px 4px;
+			border-radius: 3px;
+			transition: background-color 0.3s ease;
+		}
 
+		.custom-link:hover {
+			background-color: rgba(44, 74, 124, 0.1);
+		}
+		.button-container {
+			text-align: center; /* 버튼을 중앙 정렬 */
+			margin-top: 15px; /* 버튼과 위 요소 간의 간격 */
+		}
+		.details-button {
+			background-color: var(--navy);
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			margin-top: 15px;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		.details-button:hover {
+			color: var(--gold);
+			text-shadow: 0 0 5px var(--gold);
+			background-color: var(--light-navy);
+		}
+	
+		.button-container {
+			text-align: center;
+			margin-top: 15px;
+		}
+		/* 글자색 */
+		.bg-light-red-2 { background-color: #ea9999; }
+		.bg-light-yellow { background-color: #fff2cc; }
+		.bg-light-blue { background-color: #d0e0e3; }
+		.bg-very-light-green { background-color: #d9ead3; }
+		.text-red { color: #c53929; }
+		.bg-light-orange { background-color: #fce5cd; }
+		.bg-light-purple { background-color: #d9d2e9; }
+		
+		/* 모달 기본 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+			z-index: 1000;
+        }
+		<!--
+        /* 모달 내용 스타일 */
+        .modal-content {
+			position: relative;
+			background-color: white;
+			margin: 5% auto; /* 상단 여백을 줄임 */
+			padding: 20px;
+			width: 90%; /* 너비를 늘림 */
+			max-width: 550px; /* 최대 너비를 늘림 */
+			height: 840px;  /* 90vh; 높이를 뷰포트의 90%로 설정 */
+			overflow: auto; /* 내용이 넘칠 경우 스크롤 추가 */
+			z-index: 1000;
+		}
+		.modal iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+        /* 닫기 버튼 스타일 */
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 24px;
+            cursor: pointer;
+			z-index: 1000;
+        }-->
+		
+		/* 모달 내용 스타일 */
+		.modal-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: white;
+			overflow: auto;
+			z-index: 1001;
+		}
+
+		.modal iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+		/* 닫기 버튼 스타일 */
+		.close {
+			position: absolute;
+			right: 20px;
+			top: 20px;
+			font-size: 30px;
+			cursor: pointer;
+			z-index: 1002;
+			color: #333;
+		}
+
+		/* 모바일 기기를 위한 미디어 쿼리 */
+		@media screen and (max-width: 768px) {
+			.modal-content {
+				padding: 0;
+			}
+
+			.close {
+				right: 10px;
+				top: 10px;
+			}
+		}
+				
     </style>
 </head>
 <body>
@@ -414,27 +549,57 @@
     <main role="main">
         <div class="container">
             <section class="section" aria-labelledby="channel-intro">
-                <h2 id="channel-intro">채널 소개</h2>
-                <p>우리 방의 대원칙은 <strong>상대존중</strong> 입니다.</p>
-                <p>상대존중은 표면적 대화체 뿐 아니라 상대를 대하는 태도와 보이지 않는 마음까지 아우릅니다.</p>
-            </section>
+				<h2 id="channel-intro">채널 소개</h2>
+				<p>우리는 카카오톡 오픈채팅방과 정보아카이브(카페)를 운영중입니다.</p>
+				<ul>
+					<li><a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1(카톡 정보방)</a>: <strong>정보 공유</strong>전용 
+					<li><a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2(카톡 대화방)</a>: <strong>대화</strong>목적 활용
+					<li><a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보(카페)</a>: 주제키워드 뉴스만 업로드되는 아카이브
+				</ul>
+				<p class="bg-very-light-green">모든 정보는 1방에 공유하며 대화는 2방에서 가능합니다.</p>
+				<p class="bg-light-purple">우리채널의 주기능은 <strong>'정보공유'</strong>입니다.</p>
+				
+				<p></p>
+				<div class="button-container">
+        <div class="button-container">
+			<button class="details-button" onclick="scrollToFooter()">운영채널 전체보기</button>
+		</div>
+			</section>
 
             <section class="section" aria-labelledby="chat-rules">
                 <h2 id="chat-rules">대화방 활동</h2>
+                <p>우리 방의 대원칙은 <strong class="bg-light-blue">상대존중</strong> 입니다.</p>
+                <p>상대존중은 표면적 대화체 뿐 아니라 태도와 보이지 않는 마음까지 아우릅니다.</p>
                 <ul>
-                    <li>대화체는 문장 마침이 되는 형태와 존댓말 사용을 기본으로 합니다.</li>
+                    <li>대화체는 문장 마침이되는 형태와 존댓말 사용을 기본으로 합니다.</li>
                     <li>음슴체는 정보를 간추려 전할 때 사용합니다.</li>
-                    <li>독백체, 말줄임체 사용으로 인한 오해나 문제 발생 시 책임은 본인에게 있습니다.</li>
-                    <li>방주제 특성상 비상 시 인원 유입이 많아집니다. 혼잡도에 따라 끊어쓰기 자제를 권장합니다.</li>
+                    <li><span class="text-red">독백체, 말줄임체, 끊어쓰기는 금지합니다.(오해 및 혼란 방지)</span></li>
                 </ul>
+                    <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 대응매뉴얼대로 운영합니다.</span></p>				
             </section>
 
+			<!-- 모달 컨테이너 -->
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<span class="close" onclick="closeModal()">&times;</span>
+						<iframe id="modalIframe"></iframe>
+					</div>
+				</div>
+
             <section class="section" aria-labelledby="nickname-rules">
-                <h2 id="nickname-rules">개별닉네임</h2>
-                <p>중복되지 않는 개별닉네임으로 변경 후 활동 바랍니다.</p>
+                <h2 id="nickname-rules">금지하는 닉네임</h2>
+                <p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)합니다.</span></p>
+				<p>원활한 관리를 위해 <span class="text-red"><strong>기본닉네임</strong></span>과 <span class="text-red"><strong>발음할 수 없는 닉네임</strong></span>은 <span class="text-red">금지</span>합니다.</span></p> 
+				<ul>
+				 <li>~무지, ~제이지 등 <span class="bg-light-orange">자동생성된 기본닉네임</span></li>
+				 <li>발음할 수 없는 형태 <span class="bg-light-orange">예)ㄱ(초성), .(점), 특수기호 등 </span></li>
+				 <li><p class="bg-very-light-green">영어 외 외국어 사용 시 한국어도 함께 표기 예)οὐρανός(우라노스) </span></li>
                 <h3 id="nickname-change">닉네임 변경방법</h3>
-                <p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
-                <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>
+				<div class="button-container">
+					<button class="details-button" onclick="openModal()">변경방법 보기</button>
+				</div> 
+                <!--<p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
+                <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>-->
             </section>
 
             <div class="section" role="region" aria-labelledby="info-topics">
@@ -486,14 +651,12 @@
 					<p>예언, 정치, 종교 주제의 대화는 대화방에서는 불가하며 카페 <a href="https://bit.ly/WorldDisinfo" target="_blank" rel="noopener noreferrer" class="special-link">주장게시판</a>에 근거와 요점이 정리된 글 게시만 허용</p>
 					<h3 id="non-topics-handling">비주제 취급방식</h3>
 					<ul>
-						<li>정리된 정보는 <a href="https://bit.ly/WorldDisinfo" target="_blank" rel="noopener noreferrer" class="special-link">카페</a>에서 취급</li>
-						<li>[비주제] 말머리를 붙여서 <a href="https://bit.ly/Disinfo1" target="_blank" rel="noopener noreferrer" class="special-link">1방</a>에 공유(신선도 고려)</li>
-						<li>자세한 사항은 <a href="https://cafe.naver.com/worddisinfo/457" target="_blank" rel="noopener noreferrer" class="special-link">카페글</a>참고</li>
+						<li>정리된 정보는<a href="https://bit.ly/WorldDisinfo" target="_blank" rel="noopener noreferrer" class="special-link">카페</a>에서 취급</li>
+						<li>[비주제] 말머리를 붙여서<a href="https://bit.ly/Disinfo1" target="_blank" rel="noopener noreferrer" class="special-link">1방</a>에 공유(신선도 고려)</li>
+						<li>자세한 사항은<a href="https://cafe.naver.com/worddisinfo/457" target="_blank" rel="noopener noreferrer" class="special-link">카페글</a>참고</li>
 					</ul>
 				</div>
 			</div>
-				
-				
 				
 				<div class="section" role="region" aria-labelledby="admin-intervention">
 					<h2 id="admin-intervention">운영진 개입 및 즉시 퇴장사항</h2>
@@ -509,10 +672,25 @@
 						<li>국가를 위해 일하는 분들의 용기와 명예를 실추시키는 행위</li>
 					</ul>
 				</div>
-        </div>
-
+        
+		
+		    <section class="section" aria-labelledby="chat-rules">
+                <h2 id="chat-rules">요약된 방칙</h2>
+                <ul>
+					<li><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">발음가능한 미중복 개별닉네임 변경(1, 2방 동일닉네임)</li>
+                    <li>대화 시 <strong class="bg-light-blue">상대존중</strong> (미준수 시 무관용)</li>
+					<li>문장마침체 + 존댓말 사용(독백체, 말줄임체, 끊어쓰기 금지)</li>
+                </ul>
+                    <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 대응매뉴얼대로 운영합니다.</span></p>				
+            </section>
+			
+		</div>	
+		<div class="button-container">
+		<button class="details-button" onclick="scrollToTop()">처음으로 가기</button>
+		</div><br>
         <div id="current-time"></div>
     </div>
+	
 </body>
 
 
@@ -533,10 +711,10 @@
             <div class="footer-section">
                 <h3>함께 운영중인 채널</h3>
                 <ul>
-                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보(1정보방)</a></li>
-					<li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보(2대화방)</a></li>
+                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보 1(카톡 정보방)</a></li>
+					<li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2(카톡 대화방)</a></li>
 				    <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보(카페)</a></li>
-					<li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(요약 시트)</a></li>
+					<li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(뉴스 시트)</a></li>
 					<li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li>
                     <li><a href="https://bit.ly/DisInfoTalkCafe" target="_blank">세계정세 재난정보대화방 (카페,멤버가능)</a></li>
                 </ul>
@@ -544,7 +722,6 @@
 			
 			<div class="footer-section">
 				<h3>운영진</h3>
-                <p class="silver-shine">로켓맨</p>
 				<p class="silver-shine">달빛</p>
 				<p class="silver-shine">뿐빵뿡빵</p>
 				<h3>만든이</h3>
@@ -555,6 +732,27 @@
     </footer>
 
     <script>
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
+
+	function scrollToFooter() {
+		const footer = document.querySelector('footer');
+		footer.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	// 스크롤 이벤트 리스너 추가
+	window.addEventListener('scroll', function() {
+		var backToTopButton = document.getElementById('back-to-top');
+		if (window.pageYOffset > 300) { // 300px 이상 스크롤되면 버튼 표시
+			backToTopButton.style.display = 'block';
+		} else {
+			backToTopButton.style.display = 'none';
+		}
+	});
     // 현재 시간 표시
 		function updateTime() {
 			const now = new Date();
@@ -704,6 +902,41 @@
 					}, 300);
 				});
 			});
+		}
+		function scrollToFooter() {
+			const footer = document.querySelector('footer');
+			footer.scrollIntoView({ behavior: 'smooth' });
+		}
+		function openModal() {
+			let modal = document.getElementById('myModal');
+			let iframe = document.getElementById('modalIframe');
+			
+			modal.style.display = 'block';
+			iframe.src = 'kakaoNickIntro.html';
+		}
+
+		function closeModal() {
+			let modal = document.getElementById('myModal');
+			let iframe = document.getElementById('modalIframe');
+			
+			// 모달 내용을 즉시 숨김
+			modal.style.opacity = '0';
+			modal.style.transition = 'opacity 0.5s';
+			
+			// 2초 후에 모달을 완전히 닫고 iframe 소스를 지움
+			setTimeout(() => {
+				modal.style.display = 'none';
+				iframe.src = '';
+				modal.style.opacity = '1'; // 다음 열림을 위해 불투명도 초기화
+			}, 2000);
+		}
+
+		// 모달 외부 클릭시 닫기
+		window.onclick = function(event) {
+			let modal = document.getElementById('myModal');
+			if (event.target == modal) {
+				closeModal();
+			}
 		}
 </script>
 </html>
