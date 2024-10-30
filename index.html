@@ -461,35 +461,7 @@
             background-color: rgba(0,0,0,0.5);
 			z-index: 1000;
         }
-		<!--
-        /* 모달 내용 스타일 */
-        .modal-content {
-			position: relative;
-			background-color: white;
-			margin: 5% auto; /* 상단 여백을 줄임 */
-			padding: 20px;
-			width: 90%; /* 너비를 늘림 */
-			max-width: 550px; /* 최대 너비를 늘림 */
-			height: 840px;  /* 90vh; 높이를 뷰포트의 90%로 설정 */
-			overflow: auto; /* 내용이 넘칠 경우 스크롤 추가 */
-			z-index: 1000;
-		}
-		.modal iframe {
-			width: 100%;
-			height: 100%;
-			border: none;
-		}
-
-        /* 닫기 버튼 스타일 */
-        .close {
-            position: absolute;
-            right: 10px;
-            top: 5px;
-            font-size: 24px;
-            cursor: pointer;
-			z-index: 1000;
-        }-->
-		
+	
 		/* 모달 내용 스타일 */
 		.modal-content {
 			position: absolute;
@@ -516,18 +488,38 @@
 			font-size: 30px;
 			cursor: pointer;
 			z-index: 1002;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+			transition: all 0.3s ease;
+			animation: colorChange 4s infinite;
+			text-decoration: none;
+			border: none;
+			outline: none;
 			color: #333;
+			line-height: 1;
+		}
+
+		@keyframes colorChange {
+			0%, 100% {
+				color: #333;
+			}
+			50% {
+				color: #fff;
+			}
 		}
 
 		/* 모바일 기기를 위한 미디어 쿼리 */
 		@media screen and (max-width: 768px) {
-			.modal-content {
-				padding: 0;
-			}
-
 			.close {
 				right: 10px;
 				top: 10px;
+				font-size: 24px;
+				width: 30px;
+				height: 30px;
 			}
 		}
 				
@@ -558,8 +550,6 @@
 				</ul>
 				<p class="bg-very-light-green">모든 정보는 1방에 공유하며 대화는 2방에서 가능합니다.</p>
 				<p class="bg-light-purple">우리채널의 주기능은 <strong>'정보공유'</strong>입니다.</p>
-				
-				<p></p>
 				<div class="button-container">
         <div class="button-container">
 			<button class="details-button" onclick="scrollToFooter()">운영채널 전체보기</button>
@@ -581,7 +571,7 @@
 			<!-- 모달 컨테이너 -->
 				<div id="myModal" class="modal">
 					<div class="modal-content">
-						<span class="close" onclick="closeModal()">&times;</span>
+						<span class="close" onclick="closeModal()">x</span>
 						<iframe id="modalIframe"></iframe>
 					</div>
 				</div>
@@ -593,10 +583,10 @@
 				<ul>
 				 <li>~무지, ~제이지 등 <span class="bg-light-orange">자동생성된 기본닉네임</span></li>
 				 <li>발음할 수 없는 형태 <span class="bg-light-orange">예)ㄱ(초성), .(점), 특수기호 등 </span></li>
-				 <li><p class="bg-very-light-green">영어 외 외국어 사용 시 한국어도 함께 표기 예)οὐρανός(우라노스) </span></li>
+				 <li><p class="bg-very-light-green">영어 외 외국어 사용 시 한국어도 함께 표기 예)οὐρανός(우라노스)</p></li>
                 <h3 id="nickname-change">닉네임 변경방법</h3>
 				<div class="button-container">
-					<button class="details-button" onclick="openModal()">변경방법 보기</button>
+					<button class="details-button" onclick="openModal('kakaoNickIntro.html')">변경방법 보기</button>
 				</div> 
                 <!--<p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
                 <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>-->
@@ -672,7 +662,19 @@
 						<li>국가를 위해 일하는 분들의 용기와 명예를 실추시키는 행위</li>
 					</ul>
 				</div>
-        
+
+		    <section class="section" aria-labelledby="chat-rules">
+                <h2 id="chat-rules">질문방법과 참고정보</h2>
+				<ul>
+					<li><span class="bg-light-orange">단순 무지성 질문은 지양</span>('전쟁나요?', '언제 전쟁나요?')</li>
+					<li>'질문 의도나 의미'를 밝힌 후 질문하면 보다 양질의 답변을 기대할 수 있습니다.</li>
+					<li><span class="bg-very-light-green">질문하기 전 먼저 자주 묻는 질문(FAQ)을 보시고 질문바랍니다.</span></li>
+				</ul>
+			<div class="button-container">
+				<button class="details-button" onclick="openModal('FAQAccordion.html')">자주 묻는 질문(FAQ)</button>
+				<!--<button class="details-button" onclick="openModal('thirdFile.html')">정문정답(QNA)</button>-->
+			</div>
+            </section>        
 		
 		    <section class="section" aria-labelledby="chat-rules">
                 <h2 id="chat-rules">요약된 방칙</h2>
@@ -907,12 +909,12 @@
 			const footer = document.querySelector('footer');
 			footer.scrollIntoView({ behavior: 'smooth' });
 		}
-		function openModal() {
+		function openModal(filePath) {
 			let modal = document.getElementById('myModal');
 			let iframe = document.getElementById('modalIframe');
 			
 			modal.style.display = 'block';
-			iframe.src = 'kakaoNickIntro.html';
+			iframe.src = filePath;
 		}
 
 		function closeModal() {
