@@ -464,6 +464,7 @@
 		.text-deep-blue { color: #253b4d; }
 		.bg-light-orange { background-color: #fce5cd; }
 		.bg-light-purple { background-color: #d9d2e9; }
+		.bg-light-green { background-color: #b7e1cd; }
 
 		/* 모달 기본 스타일 */
         .modal {
@@ -537,6 +538,131 @@
 				height: 30px;
 			}
 		}
+				/*툴팁 관련*/
+		.tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #666;
+            cursor: help;
+        }
+
+        .tooltip .tooltip-text {
+		  visibility: hidden;
+		  width: 300px;
+		  background-color: #2c3e50;
+		  color: #fff;
+		  text-align: left;
+		  border-radius: 6px;
+		  padding: 10px;
+		  position: absolute;
+		  z-index: 1;
+		  bottom: 125%;
+		  left: 50%;
+		  transform: translateX(-50%);
+		  opacity: 0;
+		  transition: opacity 0.3s;
+		  font-size: 0.9em;
+		  line-height: 1.4;
+		  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+		}
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2c3e50 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+		.tooltip .tooltip-text ul {
+			padding-left: 20px;
+			margin: 5px 0;
+		}
+		.tooltip .tooltip-text li {
+			margin-bottom: 5px;
+		}
+		.tooltip .tooltip-text .text-deep-blue {
+			color: #0000FF;
+			font-weight: bold;
+		}
+		.tooltip .tooltip-text .text-red {
+			color: #FF0000;
+			font-weight: bold;
+		}
+		.tooltip .tooltip-text .bg-very-light-green {
+			background-color: #E8F5E9;
+			padding: 2px 4px;
+		}
+
+        /* 모바일에서는 툴팁을 터치로 활성화 */
+        @media (max-width: 768px) {
+            .tooltip .tooltip-text {
+                width: 200px; /* 모바일에서 더 좁은 너비 */
+				right: -100px; /* 오른쪽으로 약간 이동 */
+                font-size: 0.8em;
+            }
+        }
+		/*접기 관련*/
+		.collapsible {
+            cursor: pointer;
+            border-bottom: 1px dotted #666;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+        }
+
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 0 15px;
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0s linear 300ms, opacity 300ms;
+        }
+
+        .collapse-content.show {
+            max-height: 500px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+			visibility: visible;
+			opacity: 1;
+			transition: visibility 0s linear 0s, opacity 300ms;
+        }
+
+        .collapsible:hover {
+            color: #1a252f;
+        }
+
+        /* 화살표 아이콘 스타일 */
+        .collapsible::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .collapsible.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .collapse-content.show {
+                max-height: 1000px; /* 모바일에서 더 큰 높이 허용 */
+            }
+        }
 
     </style>
 </head>
@@ -560,9 +686,9 @@
 					<h2 id="channel-intro">채널 소개</h2>
 					<p>우리는 카카오톡 오픈채팅방과 정보아카이브(카페)를 운영중입니다.</p>
 					<ul>
-						<li><a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1(카톡 정보방)</a>: <strong>정보 공유</strong>전용
-						<li><a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2(카톡 대화방)</a>: <strong>대화</strong>목적 활용
-						<li><a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보(카페)</a>: 주제키워드 뉴스만 업로드되는 아카이브
+						<li>정보 공유 전용 <a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1 정보방(카톡)</a>
+						<li>대화 목적 전용 <a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2 대화방(카톡)</a>
+						<li>주제키워드 뉴스 아카이브<a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보 (카페)</a> 
 					</ul>
 					<p class="bg-very-light-green">모든 정보는 1방에 공유하며 대화는 2방에서 가능합니다.</p>
 					<p class="bg-light-purple">우리채널의 주기능은 <strong>'정보공유'</strong>입니다.</p>
@@ -579,11 +705,11 @@
                 <p>우리 방의 대원칙은 <strong class="bg-light-blue">상대존중</strong> 입니다.</p>
                 <p>상대존중은 표면적 대화체 뿐 아니라 태도와 보이지 않는 마음까지 아우릅니다.</p>
                 <ul>
-                    <li>대화체는 문장 마침이되는 형태와 존댓말 사용을 기본으로 합니다.</li>
-                    <li>음슴체는 정보를 간추려 전할 때 사용합니다.</li>
-                    <li><span class="text-red">독백체, 말줄임체, 끊어쓰기는 금지합니다.(오해 및 혼란 방지)</span></li>
+                    <li>대화체는 <span class="tooltip">문장 마침이 되는 형태와 존댓말<span class="tooltip-text">~다., ~요 등</span></span> 사용을 기본으로 합니다.</li>
+                    <li><span class="tooltip">음슴체<span class="tooltip-text">예시)<br>김정은이 발사 현장 참관함<br> 해군 김명식과 미사일총국 병사들도 참관함<br> 국가 핵무력 완성 선포함</span>는 정보를 간추려 전할 때 사용합니다.</span></li>
+                    <li><span class="text-red"><span class="tooltip">독백체, 말줄임체, <span class="tooltip-text">독백체, 말줄임체 예시) <br>~한듯, ~한데 등 어미를 흐리는 표현<br><br>끊어쓰기 예시)<br>그런데<br>왜<br>~할까요?<br></span>끊어쓰기는 금지합니다.(오해 및 혼란 방지)</span></span></li>
                 </ul>
-                    <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 대응매뉴얼대로 운영합니다.</span></p>
+                    <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 자체 대응매뉴얼대로 운영합니다.</span></p>
             </section>
 
 			<!-- 모달 컨테이너 -->
@@ -598,9 +724,9 @@
 			<div class="section-content">
                 <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
 
-				<p>실명이 아닌 닉네임을 사용하는 대화방 특성상 <span class="text-deep-blue"><strong>호명가능한 닉네임</strong></span>을 사용해야합니다.</p>
+				<p>실명이 아닌 닉네임을 사용하는 대화방 특성상 <span class="text-deep-blue"><strong>호명가능한 닉네임</strong></span>을 사용해야하며 <span class="text-red"><span class="tooltip"><strong>카톡자동생성 기본닉네임</strong><span class="tooltip-text">~무지, ~제이지 등</span></span></span>과 <span class="text-red"><span class="tooltip"><strong>발음 할 수 없는 닉네임</strong><span class="tooltip-text">특수문자 또는 자음/모음으로만 이루어진 경우<br>zckh, ㄷㄹㅎㅁ, .(점) 등</span></span></span>은 <span class="text-red">금지</span>합니다.</span></p>
 				<p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)</span>합니다.</p>
-				<p><span class="text-red"><strong>카톡자동생성 기본닉네임</strong></span>과 <span class="text-red"><strong>발음할 수 없는 닉네임</strong></span>은 <span class="text-red">금지</span>합니다.</span></p>
+				<p></p>
 
 				<p><span class="text-deep-blue">허용되는 닉네임</span></p>
 				<ul>
@@ -666,13 +792,12 @@
       				</div>
 				<div class="sub-section" role="region" aria-labelledby="non-topics">
 					<h3 id="non-topics">공유하는 정보 출처</h3>
-					<p>우리 채널은 공식 채널 정보를 우선하여 공유합니다.</p>
+					<p>우리 채널은 <span class="tooltip"><strong>공식 채널 정보</strong><span class="tooltip-text">언론사 뉴스 및 공식채널, 전문가 견해 등</span></span>를 우선하여 공유합니다.</p>
 
-					<h3 id="non-topics">개인채널 정보공유</h3>
+					<h3 id="non-topics">개인채널 정보</h3>
 					
 					<p>공식 채널 정보를 우선하되 <span class="bg-very-light-green">개인 채널(유튜브, 블로그 등)정보 공유 시 아래 조건을 만족</span>해야 합니다.</p>
 					
-					<p><h3>개인채널 정보 공유 시</h3></p>
 					<ul>
 						<li>해당 정보의 출처와 근거가 뚜렷한 경우</li>
 						<li><span class="bg-very-light-green">정리된 요점 먼저 공유한 후 채널 링크 공유(선 요점, 후 링크)</span></li>
@@ -701,8 +826,18 @@
             <li>운영진 요청에 비협조적 태도 일관 시</li>
 						<li>불쾌감 컨텐츠 공유 시(혈흔, 사망장면 포함 등)</li>
 						<li>허위정보(장난성) 및 무협의 광고 유포 시</li>
-						<li>확정적 예언, 편향적 정치발언 시</li>
-						<li>혐오 및 감정적 표현 등 불안, 분란조장 시</li>
+						<li><span class="tooltip">확정적 예언<span class="tooltip-text">개인의 주관적 표현이 아닌 '00년 0월0일 ~한다' 예언성 발언</span>, 편향적 정치발언 시</span></li>
+						<li><span class="collapsible" data-target="content3">혐오 및 감정적 표현 등 불안, 분란조장 시</span></li>
+						<div id="content3" class="collapse-content">
+						
+						<p>개인의 단발적인 불안 표현은 가능<br>(단, 잦은 빈도로 방 분위기 해칠 경우 운영진 개입)</p>
+						
+						<p>정세를 통찰하여 나름의 근거를 통한 전쟁 예상은 허용</p>
+						
+						<p><span class="bg-light-red-2">금지 예시)</span> '동일인의 지속된 불안표현', '특정 고문 행위 묘사' 등 불안을 야기하고 확산시키는 발언은 <strong>불안감 조성으로 간주</strong>하며, 그외 방 분위기를 해치는 활동은 <span class="text-red">운영진 개입</span><p>
+						<p><span class="bg-light-green">허용 예시)</span> '요즘 정세를 보고 있으면 마치 전쟁을 준비하고 있는 것 같다.', '어제 전쟁하는 꿈을 꾸었다.', '밖에서 폭발음이 들렸다' 등 <strong>문제되지 않으나 빈도가 잦으면 문제로 간주</strong><p>
+						<p>관심성(어그로성) + 무례한 태도로 기존 대화 흐름을 방해하거나 상대를 수용하지 않는 일방적 대화태도로 방 분위기를 해치는 활동을 분란으로 규정.<p>
+						</div>
 						<li>욕설, 비속어 사용 또는 닉네임에 포함 시</li>
 						<li>국가 포기, 이민 등 선동 시</li>
 						<li>국가를 위해 일하는 분들의 용기와 명예를 실추시키는 행위</li>
@@ -983,5 +1118,109 @@
 				closeModal();
 			}
 		}
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			// 모바일 디바이스 확인
+			const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+
+			const tooltips = document.querySelectorAll('.tooltip');
+			
+			tooltips.forEach(tooltip => {
+				if (isMobile) {
+					// 모바일에서는 터치 이벤트 사용
+					let isTooltipVisible = false;
+					
+					tooltip.addEventListener('touchstart', function(e) {
+						e.preventDefault(); // 기본 터치 동작 방지
+						
+						// 모든 다른 툴팁 숨기기
+						tooltips.forEach(t => {
+							const tooltipText = t.querySelector('.tooltip-text');
+							if (tooltipText) {
+								tooltipText.style.visibility = 'hidden';
+								tooltipText.style.opacity = '0';
+							}
+						});
+						
+						// 현재 툴팁 토글
+						const tooltipText = this.querySelector('.tooltip-text');
+						if (tooltipText) {
+							if (isTooltipVisible) {
+								tooltipText.style.visibility = 'hidden';
+								tooltipText.style.opacity = '0';
+							} else {
+								tooltipText.style.visibility = 'visible';
+								tooltipText.style.opacity = '1';
+							}
+							isTooltipVisible = !isTooltipVisible;
+						}
+					});
+					
+					// 툴팁 외부 터치 시 닫기
+					document.addEventListener('touchstart', function(e) {
+						if (!tooltip.contains(e.target)) {
+							const tooltipText = tooltip.querySelector('.tooltip-text');
+							if (tooltipText) {
+								tooltipText.style.visibility = 'hidden';
+								tooltipText.style.opacity = '0';
+								isTooltipVisible = false;
+							}
+						}
+					});
+				} else {
+					// 데스크톱에서는 마우스 이벤트 사용
+					tooltip.addEventListener('mouseenter', function() {
+						const tooltipText = this.querySelector('.tooltip-text');
+						if (tooltipText) {
+							tooltipText.style.visibility = 'visible';
+							tooltipText.style.opacity = '1';
+						}
+					});
+
+					tooltip.addEventListener('mouseleave', function() {
+						const tooltipText = this.querySelector('.tooltip-text');
+						if (tooltipText) {
+							tooltipText.style.visibility = 'hidden';
+							tooltipText.style.opacity = '0';
+						}
+					});
+				}
+			});
+		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			const collapsibles = document.getElementsByClassName('collapsible');
+			
+			for (let i = 0; i < collapsibles.length; i++) {
+				collapsibles[i].addEventListener('click', function() {
+					this.classList.toggle('active');
+					const targetId = this.getAttribute('data-target');
+					const content = document.getElementById(targetId);
+					
+					if (content) {
+						if (content.classList.contains('show')) {
+							content.classList.remove('show');
+							content.style.maxHeight = null;
+						} else {
+							// 다른 열린 내용들 닫기 (선택적)
+							const allContents = document.getElementsByClassName('collapse-content');
+							for (let j = 0; j < allContents.length; j++) {
+								allContents[j].classList.remove('show');
+								allContents[j].style.maxHeight = null;
+							}
+							const allCollapsibles = document.getElementsByClassName('collapsible');
+							for (let j = 0; j < allCollapsibles.length; j++) {
+								allCollapsibles[j].classList.remove('active');
+							}
+							
+							// 현재 내용 열기
+							content.classList.add('show');
+							content.style.maxHeight = content.scrollHeight + "px";
+							this.classList.add('active');
+						}
+					}
+				});
+			}
+		});
 </script>
 </html>
