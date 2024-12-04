@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:image" content="images/First_image.png">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <title>세계정세 재난정보 공지</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+		:root {
+			--navy: #1a365d;
+			--light-navy: #2c4a7c;
+			--off-white: #f0f4f8;
+			--gold: #ffd700;
+		}
+
+		body {
+			font-family: 'Noto Sans KR', sans-serif;
+			background-color: var(--off-white);
+			color: #333;
+			line-height: 1.6;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 100%;
+			padding: 0;
+			margin: 0;
+		}
+
+		.section-content {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		header {
+			background-color: var(--navy);
+			color: #fff;
+			text-align: center;
+			padding: 40px 0;
+			margin-bottom: 30px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		h1 {
+			font-size: 3em;
+			margin: 0;
+			position: relative;
+		}
+
+		.subtitle {
+			color: rgba(255, 255, 255, 0.7);
+			font-size: 1.2em;
+			margin-top: 10px;
+		}
+
+		@keyframes blueShine {
+			0%, 100% { color: #fff; text-shadow: none; }
+			50% { color: #4d79ff; text-shadow: 0 0 10px #4d79ff; }
+		}
+
+		@keyframes whiteShine {
+			0%, 100% { color: #fff; text-shadow: none; }
+			50% { color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b; }
+		}
+
+		@keyframes ColorChange {
+			0%, 100% { color: #333; }
+			50% { color: #c53929; } /* 중간 색상으로 변경 */
+		}
+
+		.title-part1 {
+			animation: blueShine 4s infinite;
+		}
+
+		.title-part2 {
+			animation: whiteShine 4s infinite 2s;
+		}
+		.subtitle-part1 {
+			animation: ColorChange 4s infinite 1.8s;
+		}
+
+		@keyframes cloudFireAnimation {
+			0% { text-shadow: 0 0 5px #ff6b6b, 0 0 10px #4d79ff; }
+			50% { text-shadow: 0 0 10px #4d79ff, 0 0 15px #ff6b6b; }
+			100% { text-shadow: 0 0 5px #ff6b6b, 0 0 10px #4d79ff; }
+		}
+
+		h1 {
+			animation: cloudFireAnimation 5s infinite;
+		}
+
+		h1::after {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			width: 100%;
+			height: 50px;
+			background: linear-gradient(to top, transparent, rgba(255,255,255,0.1));
+			transform: translateX(-50%);
+			animation: smokeAnimation 3s infinite;
+		}
+
+		h2, h3 {
+			color: var(--navy);
+		}
+
+		.section {
+			background-color: #fff;
+			border-top: 2px solid #ccc;
+			border-bottom: 2px solid #ccc;
+			border-left: none;
+			border-right: none;
+			padding: 20px 0; /* 상하 패딩만 유지 */
+			margin-bottom: 20px;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			width: 100%; /* 전체 너비 사용 */
+			max-width: none; /* 최대 너비 제한 제거 */
+			box-sizing: border-box; /* 패딩을 너비에 포함 */
+		}
+
+		.section:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+		}
+
+		.section ul {
+			padding-left: 20px;
+			list-style-type: disc;
+		}
+
+		.section ul li {
+			font-size: 0.9em;
+		}
+
+		.section ul li::marker {
+			font-size: 0.3em;
+			animation: silverShine 2s infinite;
+		}
+
+		.info-category {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+		}
+
+		.info-item {
+			background-color: var(--light-navy);
+			color: #fff;
+			padding: 15px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+		}
+
+		.info-item:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+		}
+
+		.info-item h3 {
+			color: #fff;
+			text-align: center;
+		}
+
+		.info-item:hover h3 {
+			color: var(--gold);
+		}
+
+		.info-item:hover ~ .info-item {
+			opacity: 0.5;
+		}
+
+		.info-item ul {
+			text-align: left;
+			padding-left: 20px;
+		}
+
+		footer {
+			background-color: var(--navy);
+			color: #fff;
+			position: relative;
+			z-index: 101;
+			margin-top: 0;
+		}
+
+		.footer-content {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+
+		.footer-section {
+			flex: 1;
+			margin: 10px;
+			min-width: 200px;
+		}
+
+		.footer-section h3 {
+			color: #fff;
+			border-bottom: 2px solid #fff;
+			padding-bottom: 10px;
+		}
+
+		.footer-section ul {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.footer-section ul li {
+			margin-bottom: 10px;
+		}
+
+		.footer-section ul li a {
+			color: #fff;
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+		.footer-section ul li a:hover {
+			color: var(--gold);
+		}
+
+		#current-time {
+			background-color: var(--navy);
+			color: #fff;
+			font-weight: 700;
+			padding: 10px 0;
+			text-align: center;
+			position: sticky;
+			bottom: 0;
+			z-index: 100;
+			width: 100%;
+			margin: 0;
+		}
+
+		.special-link {
+			color: #043d69;
+			font-weight: bold;
+			text-decoration: none;
+			transition: all 0.5s ease;
+			padding: 2px 5px;
+			background-color: rgba(255, 215, 0, 0.1);
+			border-radius: 3px;
+		}
+
+		.special-link:hover {
+			text-shadow: 0 0 5px var(--gold);
+			background-color: rgba(255, 215, 0, 0.2);
+		}
+
+		.sub-section {
+			background-color: rgba(26, 54, 93, 0.1);
+			padding: 15px;
+			border-radius: 8px;
+			margin-top: 10px;
+		}
+
+		.progress-container {
+			width: 100%;
+			height: 5px;
+			background: #ccc;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+
+		.progress-bar {
+			height: 5px;
+			background: var(--navy);
+			width: 0%;
+			transition: width 0.3s ease;
+		}
+
+		@keyframes goldShine {
+			0% { color: #ffd700; text-shadow: 0 0 5px #ffd700; }
+			50% { color: #ffec8b; text-shadow: 0 0 10px #ffec8b; }
+			100% { color: #ffd700; text-shadow: 0 0 5px #ffd700; }
+		}
+
+		.gold-shine {
+			animation: goldShine 2s infinite;
+		}
+
+		@keyframes silverShine {
+			0% { color: #C0C0C0; text-shadow: 0 0 5px #C0C0C0; }
+			50% { color: #E8E8E8; text-shadow: 0 0 10px #E8E8E8; }
+			100% { color: #C0C0C0; text-shadow: 0 0 5px #C0C0C0; }
+		}
+
+		.silver-shine {
+			animation: silverShine 2s infinite;
+		}
+
+		footer a {
+			text-decoration: none;
+		}
+
+		/* 모바일 최적화를 위한 미디어 쿼리 */
+		@media (max-width: 768px) {
+			h1 {
+				font-size: 2em;
+			}
+
+			.container {
+				padding: 0;
+			}
+
+			.section {
+				padding: 15px 0;
+				margin-bottom: 15px;
+			}
+			.section-content {
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+
+			.info-category {
+				grid-template-columns: 1fr;
+			}
+
+			.footer-section {
+				flex-basis: 100%;
+			}
+
+			#current-time {
+				font-size: 0.9em;
+			}
+		}
+
+		@font-face {
+            font-family: 'Noto Sans KR';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/notosanskr/v13/PbykFmXiEBPT4ITbgNA5Cgm203Tq4JJWq209pU0DPdWuqxJFA4GNDCBYtw.0.woff2) format('woff2');
+            unicode-range: U+f9ca-fa0b, U+ff03-ff05, U+ff07, U+ff0a-ff0b, U+ff0d-ff19, U+ff1b, U+ff1d, U+ff20-ff5b, U+ff5d, U+ffe0-ffe3, U+ffe5-ffe6;
+        }
+
+		.info-item {
+		  position: relative;
+		  overflow: hidden;
+		  transition: all 0.3s ease;
+		}
+
+		.info-item::before {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-size: cover;
+		  background-position: center;
+		  opacity: 0.5;
+		  filter: blur(5px);
+		  transition: all 0.3s ease;
+		  z-index: -1;
+		}
+
+		.war-bg::before {
+		  background-image: url('images/war.jpg');
+		}
+
+		.situation-bg::before {
+		  background-image: url('images/situation.jpg');
+		}
+
+		.disaster-bg::before {
+		  background-image: url('images/disaster.jpg');
+		}
+
+		.info-item:hover::before {
+		  opacity: 0.8;
+		  filter: blur(1.2px);
+		}
+
+		.info-item * {
+		  position: relative;
+		  z-index: 1;
+		}
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+		.footer-background {
+		  position: relative;
+		}
+
+		.footer-background::before {
+		  content: "";
+		  background-image: url('images/light.png');
+		  background-size: cover;
+		  background-position: center;
+		  opacity: 0.2;  /* 이 값을 조절하여 이미지의 투명도를 변경할 수 있습니다 */
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  z-index: -1;
+		}
+		.custom-link {
+			color: #2c4a7c;
+			text-decoration: none;
+			padding: 2px 4px;
+			border-radius: 3px;
+			transition: background-color 0.3s ease;
+		}
+
+		.custom-link:hover {
+			background-color: rgba(44, 74, 124, 0.1);
+		}
+		.button-container {
+			text-align: center; /* 버튼을 중앙 정렬 */
+			margin-top: 15px; /* 버튼과 위 요소 간의 간격 */
+		}
+		.details-button {
+			background-color: var(--navy);
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			margin-top: 15px;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		.details-button:hover {
+			color: var(--gold);
+			text-shadow: 0 0 5px var(--gold);
+			background-color: var(--light-navy);
+		}
+
+		.button-container {
+			text-align: center;
+			margin-top: 15px;
+		}
+		/* 글자색 */
+		.bg-light-red-2 { background-color: #ea9999; }
+		.bg-light-yellow { background-color: #fff2cc; }
+		.bg-light-blue { background-color: #d0e0e3; }
+		.bg-very-light-green { background-color: #d9ead3; }
+		.text-red { color: #c53929; }
+		.text-deep-blue { color: #253b4d; }
+		.bg-light-orange { background-color: #fce5cd; }
+		.bg-light-purple { background-color: #d9d2e9; }
+		.bg-light-green { background-color: #b7e1cd; }
+
+		/* 모달 기본 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+			z-index: 1000;
+        }
+
+		/* 모달 내용 스타일 */
+		.modal-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: white;
+			overflow: auto;
+			z-index: 1001;
+		}
+
+		.modal iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+		/* 닫기 버튼 스타일 */
+		.close {
+			position: absolute;
+			right: 20px;
+			top: 20px;
+			font-size: 30px;
+			cursor: pointer;
+			z-index: 1002;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+			transition: all 0.3s ease;
+			animation: colorChange 4s infinite;
+			text-decoration: none;
+			border: none;
+			outline: none;
+			color: #333;
+			line-height: 1;
+		}
+
+		@keyframes colorChange {
+			0%, 100% {
+				color: #333;
+			}
+			50% {
+				color: #fff;
+			}
+		}
+
+		/* 모바일 기기를 위한 미디어 쿼리 */
+		@media screen and (max-width: 768px) {
+			.close {
+				right: 10px;
+				top: 10px;
+				font-size: 24px;
+				width: 30px;
+				height: 30px;
+			}
+		}
+				/*툴팁 관련*/
+		.tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #666;
+            cursor: help;
+        }
+
+        .tooltip .tooltip-text {
+		  visibility: hidden;
+		  width: 300px;
+		  background-color: #2c3e50;
+		  color: #fff;
+		  text-align: left;
+		  border-radius: 6px;
+		  padding: 10px;
+		  position: absolute;
+		  z-index: 1;
+		  bottom: 125%;
+		  left: 50%;
+		  transform: translateX(-50%);
+		  opacity: 0;
+		  transition: opacity 0.3s;
+		  font-size: 0.9em;
+		  line-height: 1.4;
+		  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+		}
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2c3e50 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+		.tooltip .tooltip-text ul {
+			padding-left: 20px;
+			margin: 5px 0;
+		}
+		.tooltip .tooltip-text li {
+			margin-bottom: 5px;
+		}
+		.tooltip .tooltip-text .text-deep-blue {
+			color: #0000FF;
+			font-weight: bold;
+		}
+		.tooltip .tooltip-text .text-red {
+			color: #FF0000;
+			font-weight: bold;
+		}
+		.tooltip .tooltip-text .bg-very-light-green {
+			background-color: #E8F5E9;
+			padding: 2px 4px;
+		}
+
+        /* 모바일에서는 툴팁을 터치로 활성화 */
+        @media (max-width: 768px) {
+            .tooltip .tooltip-text {
+                width: 200px; /* 모바일에서 더 좁은 너비 */
+				right: -100px; /* 오른쪽으로 약간 이동 */
+                font-size: 0.8em;
+            }
+        }
+		/*접기 관련*/
+		.collapsible {
+            cursor: pointer;
+            border-bottom: 1px dotted #666;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+        }
+
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 0 15px;
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0s linear 300ms, opacity 300ms;
+        }
+
+        .collapse-content.show {
+            max-height: 500px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+			visibility: visible;
+			opacity: 1;
+			transition: visibility 0s linear 0s, opacity 300ms;
+        }
+
+        .collapsible:hover {
+            color: #1a252f;
+        }
+
+        /* 화살표 아이콘 스타일 */
+        .collapsible::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .collapsible.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .collapse-content.show {
+                max-height: 1000px; /* 모바일에서 더 큰 높이 허용 */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <header role="banner">
+        <h1 aria-label="세계정세 재난정보">
+            <span class="title-part1">세계정세</span>
+            <span class="title-part2">재난정보</span>
+        </h1>
+        <p class="subtitle">활동 전 방칙을 숙지해주시기 바랍니다.</p>
+    </header>
+
+    <main role="main">
+
+
+		    <section class="section" aria-labelledby="chat-rules">
+			<div class="section-content">
+                <h2 id="chat-rules">비상 계엄 선포</h2>
+				<p>윤석열 대통령은 2024년 12월 3일 긴급 대국민 담화를 통해 비상계엄을 선포했습니다. 대통령은 국회가 정부 출범 이후 22건의 관료 탄핵 소추를 발의하며, 이는 세계적으로 유례가 없는 상황이라고 지적했습니다. 그는 국회가 사법 및 행정 시스템을 마비시키고, 자유민주주의 체제를 위협하는 반국가 행위를 하고 있다고 비판했습니다.</p>
+                <p>대통령은 이러한 상황이 국가의 헌정 질서를 무너뜨리고 내란을 획책하는 명백한 반국가 행위라고 규정하며, 북한 공산 세력의 위협으로부터 자유 대한민국을 수호하고자 비상계엄을 선포한다고 밝혔습니다. 그는 반국가 세력을 척결하고 국가를 정상화시키겠다고 강조했습니다.</p>
+				<!-- <ul> -->
+					<!-- <li><span class="bg-light-orange">단순 무지성 질문은 지양</span>('전쟁나요?', '언제 전쟁나요?')</li> -->
+					<!-- <li>'질문 의도나 의미'를 밝힌 후 질문하면 보다 양질의 답변을 기대할 수 있습니다.</li> -->
+					<!-- <li><span class="bg-very-light-green">질문하기 전 먼저 자주 묻는 질문(FAQ)을 보시고 질문바랍니다.</span></li> -->
+				<!-- </ul> -->
+			<div class="button-container">
+				<button class="details-button" onclick="openModal('EmergencyAccordion.html')">비상계엄 선포정보</button>
+				<!--<button class="details-button" onclick="openModal('thirdFile.html')">정문정답(QNA)</button>-->
+			</div>
+			</div>
+            </section>
+
+        <div class="container">
+            <section class="section" aria-labelledby="channel-intro">
+				<div class="section-content">
+					<h2 id="channel-intro">채널 소개</h2>
+					<p>우리는 카카오톡 오픈채팅방과 정보아카이브(카페)를 운영중입니다.</p>
+					<ul>
+						<li>정보 공유 전용 <a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1 정보방(카톡)</a>
+						<li>대화 목적 전용 <a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2 대화방(카톡)</a>
+						<li>주제키워드 뉴스 아카이브<a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보 (카페)</a> 
+					</ul>
+					<p class="bg-very-light-green">모든 정보는 1방에 공유하며 대화는 2방에서 가능합니다.</p>
+					<p class="bg-light-purple">우리채널의 주기능은 <strong>'정보공유'</strong>입니다.</p>
+					<div class="button-container">
+			<div class="button-container">
+				<button class="details-button" onclick="scrollToFooter()">운영채널 전체보기</button>
+			</div>
+				</div>
+			</section>
+
+            <section class="section" aria-labelledby="chat-rules">
+				<div class="section-content">
+                <h2 id="chat-rules">대화방 활동</h2>
+                <p>우리 방의 대원칙은 <strong class="bg-light-blue">상대존중</strong> 입니다.</p>
+                <p>상대존중은 표면적 대화체 뿐 아니라 태도와 보이지 않는 마음까지 아우릅니다.</p>
+                <ul>
+                    <li>대화체는 <span class="tooltip">문장 마침이 되는 형태와 존댓말<span class="tooltip-text">~다., ~요 등</span></span> 사용을 기본으로 합니다.</li>
+                    <li><span class="tooltip">음슴체<span class="tooltip-text">예시)<br>김정은이 발사 현장 참관함<br> 해군 김명식과 미사일총국 병사들도 참관함<br> 국가 핵무력 완성 선포함</span>는 정보를 간추려 전할 때 사용합니다.</span></li>
+                    <li><span class="text-red"><span class="tooltip">독백체, 말줄임체, <span class="tooltip-text">독백체, 말줄임체 예시) <br>~한듯, ~한데 등 어미를 흐리는 표현<br><br>끊어쓰기 예시)<br>그런데<br>왜<br>~할까요?<br></span>끊어쓰기는 금지합니다.(오해 및 혼란 방지)</span></span></li>
+                </ul>
+                    <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 자체 대응매뉴얼대로 운영합니다.</span></p>
+            </section>
+
+			<!-- 모달 컨테이너 -->
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<span class="close" onclick="closeModal()">x</span>
+						<iframe id="modalIframe"></iframe>
+					</div>
+				</div>
+
+            <section class="section" aria-labelledby="nickname-rules">
+			<div class="section-content">
+                <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
+
+				<p>실명이 아닌 닉네임을 사용하는 대화방 특성상 <span class="text-deep-blue"><strong>호명가능한 닉네임</strong></span>을 사용해야하며 <span class="text-red"><span class="tooltip"><strong>카톡자동생성 기본닉네임</strong><span class="tooltip-text">~무지, ~제이지 등</span></span></span>과 <span class="text-red"><span class="tooltip"><strong>발음 할 수 없는 닉네임</strong><span class="tooltip-text">특수문자 또는 자음/모음으로만 이루어진 경우<br>zckh, ㄷㄹㅎㅁ, .(점) 등</span></span></span>은 <span class="text-red">금지</span>합니다.</span></p>
+				<p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)</span>합니다.</p>
+				<p></p>
+
+				<p><span class="text-deep-blue">허용되는 닉네임</span></p>
+				<ul>
+				 <li><p class="bg-very-light-green">발음 가능한 형태</p></li>
+				 <li><p class="bg-very-light-green">약어는 한국어 병기(본인이 원하는 발음형태)</p> 예)OMG(오엠지), ASAP(에이삽) 등</li>
+				 <li><p class="bg-very-light-green">영어 외 외국어 사용 시 한국어 병기</p> 예)οὐρανός(우라노스) 등</li>
+				</ul>
+				<p><span class="text-red">금지하는 닉네임 형태</span></p>
+				<ul>
+				 <li><span class="text-red">카톡자동생성 기본닉네임</span> ~무지, ~제이지 등 (유사해도 실수 강퇴 가능성)</li>
+				 <li><span class="text-red">발음할 수 없는 형태</span> 초성(ㄱ,ㄴ)/ 자음 또는 모음만 구성/ 특수기호 등</li>
+				 <li><span class="text-red">그외 금지하는 형태</span> 욕설, 비속어, 운영진 사칭 등</li>
+				</ul>
+                <h3 id="nickname-change">닉네임 변경방법</h3>
+				<div class="button-container">
+					<button class="details-button" onclick="openModal('kakaoNickIntro.html')">변경방법 보기</button>
+				</div>
+                <!--<p>해당채팅방 우측 상단 [설정] → 닉네임 옆 [변경] → 변경할 닉네임 입력 후 [확인]</p>
+                <p>멀티프로필 생성방법: 카카오톡 친구탭 > 내 프로필 영역 > 닉네임 우측 > '멀티프로필+' 버튼</p>-->
+			</div>
+            </section>
+
+            <section class="section" aria-labelledby="info-topics">
+            <div class="section-content">
+              <h2 id="info-topics">다루는 정보</h2>
+      				<div class="info-category">
+      					<div class="info-item war-bg" role="region" aria-labelledby="world-war">
+      						<h3 id="world-war">세계전쟁</h3>
+      						<ul>
+      							<li>진행중인 전쟁</li>
+      							<li>전쟁 우려 상황</li>
+      							<li>각국 군사 동향</li>
+      							<li>방위/군수 산업 동향</li>
+                    <li>테러, 사이버 공격 등</li>
+      							<li>전쟁 관련 소재</li>
+      						</ul>
+      					</div>
+      					<div class="info-item situation-bg" role="region" aria-labelledby="global-situation">
+      						<h3 id="global-situation">세계정세</h3>
+      						<ul>
+      							<li>국제 갈등 및 분쟁</li>
+      							<li>국제 정세</li>
+      							<li>국제 동향</li>
+      							<li>외교 관계 변화 등</li>
+      							<li>정세 관련 소재</li>
+      						</ul>
+      					</div>
+      					<div class="info-item disaster-bg" role="region" aria-labelledby="global-disasters">
+      						<h3 id="global-disasters">세계재난</h3>
+      						<ul>
+      							<li>자연재해(지진, 화산, 태풍 등)</li>
+      							<li>기후변화 관련 이슈</li>
+      							<li>식량 위기</li>
+      							<li>전염병 및 팬데믹</li>
+      							<li>우주 관련 위험</li>
+      							<li>환경 오염 및 생태계 위기</li>
+      							<li>에너지 및 자원 고갈 등</li>
+      							<li>재난 관련 불가항력적 소재</li>
+                    <li>사회혼란 : 교통사고, 화재, 사망 등</li>
+                    <li>사회범죄 : 성폭력, 비리, 급여, 마약 등</li>
+      						</ul>
+      					</div>
+      				</div>
+				<div class="sub-section" role="region" aria-labelledby="non-topics">
+					<h3 id="non-topics">공유하는 정보 출처</h3>
+					<p>우리 채널은 <span class="tooltip"><strong>공식 채널 정보</strong><span class="tooltip-text">언론사 뉴스 및 공식채널, 전문가 견해 등</span></span>를 우선하여 공유합니다.</p>
+
+					<h3 id="non-topics">개인채널 정보</h3>
+					
+					<p>공식 채널 정보를 우선하되 <span class="bg-very-light-green">개인 채널(유튜브, 블로그 등)정보 공유 시 아래 조건을 만족</span>해야 합니다.</p>
+					
+					<ul>
+						<li>해당 정보의 출처와 근거가 뚜렷한 경우</li>
+						<li><span class="bg-very-light-green">정리된 요점 먼저 공유한 후 채널 링크 공유(선 요점, 후 링크)</span></li>
+					</ul>
+					
+					<span class="bg-light-orange">즉, 공유자가 요점을 파악하고 정리된 정보만 공유 가능</span><br>
+					<span class="text-red">※요점 정리 없는 개인 채널 정보는 즉시 가림</span>
+					
+						
+		
+					<h3 id="non-topics">비주제</h3>
+					<ul>
+						<li>정세와 무관한 국내정치 및 소모적 정쟁 및 연예계, 스포츠 등</li>
+						<li>예언, 정치, 종교 소재는 대화방에서 불가하며 정리된 자료에 한해 카페<a href="https://bit.ly/WorldDisinfo" target="_blank" rel="noopener noreferrer" class="special-link">주장게시판</a>에 근거와 요점이 정리된 글 게시만 허용</li>
+						<li>그외 비주제 소재는 [비주제] 말머리를 붙여서 <a href="https://bit.ly/Disinfo1" target="_blank" rel="noopener noreferrer" class="special-link">1방</a>에 공유(신선도 고려)</li>
+						<li>가짜 뉴스 확인하는 방법 출처: <a href="https://www.ifla.org/wp-content/uploads/2019/05/assets/faife/images/how_to_spot_fake_news_korean.pdf" target="_blank" rel="noopener noreferrer" class="special-link">International Federation of Library Associations and Institutions (IFLA)</a></li>
+						
+						
+					</ul>
+				</div>
+			</div>
+      </section>
+
+				<div class="section" role="region" aria-labelledby="admin-intervention">
+				<div class="section-content">
+					<h2 id="admin-intervention">운영진 개입 및 즉시 퇴장사항</h2>
+					<ul>
+            <li>상대 존중하지 않는 태도로 활동 시</li>
+            <li>운영진 요청에 비협조적 태도 일관 시</li>
+						<li>불쾌감 컨텐츠 공유 시(혈흔, 사망장면 포함 등)</li>
+						<li>허위정보(장난성) 및 무협의 광고 유포 시</li>
+						<li><span class="tooltip">확정적 예언<span class="tooltip-text">개인의 주관적 표현이 아닌 '00년 0월0일 ~한다' 예언성 발언</span>, 편향적 정치발언 시</span></li>
+						<li><span class="collapsible" data-target="content3">혐오 및 감정적 표현 등 불안, 분란조장 시</span></li>
+						<div id="content3" class="collapse-content">
+						
+						<p>개인의 단발적인 불안 표현은 가능<br>(단, 잦은 빈도로 방 분위기 해칠 경우 운영진 개입)</p>
+						
+						<p>정세를 통찰하여 나름의 근거를 통한 전쟁 예상은 허용</p>
+						
+						<p><span class="bg-light-red-2">금지 예시)</span> '동일인의 지속된 불안표현', '특정 고문 행위 묘사' 등 불안을 야기하고 확산시키는 발언은 <strong>불안감 조성으로 간주</strong>하며, 그외 방 분위기를 해치는 활동은 <span class="text-red">운영진 개입</span><p>
+						<p><span class="bg-light-green">허용 예시)</span> '요즘 정세를 보고 있으면 마치 전쟁을 준비하고 있는 것 같다.', '어제 전쟁하는 꿈을 꾸었다.', '밖에서 폭발음이 들렸다' 등 <strong>문제되지 않으나 빈도가 잦으면 문제로 간주</strong><p>
+						<p>관심성(어그로성) + 무례한 태도로 기존 대화 흐름을 방해하거나 상대를 수용하지 않는 일방적 대화태도로 방 분위기를 해치는 활동을 분란으로 규정.<p>
+						</div>
+						<li>욕설, 비속어 사용 또는 닉네임에 포함 시</li>
+						<li>국가 포기, 이민 등 선동 시</li>
+						<li>국가를 위해 일하는 분들의 용기와 명예를 실추시키는 행위</li>
+					</ul>
+				</div>
+				</div>
+
+		    <section class="section" aria-labelledby="chat-rules">
+			<div class="section-content">
+                <h2 id="chat-rules">질문방법과 참고정보</h2>
+				<ul>
+					<li><span class="bg-light-orange">단순 무지성 질문은 지양</span>('전쟁나요?', '언제 전쟁나요?')</li>
+					<li>'질문 의도나 의미'를 밝힌 후 질문하면 보다 양질의 답변을 기대할 수 있습니다.</li>
+					<li><span class="bg-very-light-green">질문하기 전 먼저 자주 묻는 질문(FAQ)을 보시고 질문바랍니다.</span></li>
+				</ul>
+			<div class="button-container">
+				<button class="details-button" onclick="openModal('FAQAccordion.html')">자주 묻는 질문(FAQ)</button>
+				<!--<button class="details-button" onclick="openModal('thirdFile.html')">정문정답(QNA)</button>-->
+			</div>
+			</div>
+            </section>
+			<!-- <section class="section" aria-labelledby="chat-rules"> -->
+				<!-- <div class="section-content"> -->
+                <!-- <h2 id="chat-rules">협력채널</h2> -->
+				<!-- <p>아래의 협력채널은 우리채널과 각 방의 방장이 협력하는 채널입니다.</p> -->
+				
+				<!-- <ul> -->
+                    <!-- <li><a href="https://open.kakao.com/o/gWFhrY1d" target="_blank" rel="noopener noreferrer" class="special-link"><span class="tooltip">국제정세 상황 공유, 토론방(우크라이나-러시아 등)<span class="tooltip-text"></span></span></a></li> -->
+					<!-- <li><a href="https://open.kakao.com/o/gWFhrY1d" target="_blank" rel="noopener noreferrer" class="special-link">국제정세 상황 공유, 토론방(우크라이나-러시아 등)</a></li> -->
+					<!-- <li><a href="https://open.kakao.com/o/g86P3fpe" target="_blank" rel="noopener noreferrer" class="special-link">사회*철학*종교*세계토론방</a></li> -->
+                <!-- </ul> -->
+                <!-- <p><span class="bg-light-purple">정보공유를 위해 협력을 원하는 채널은<a href="https://open.kakao.com/o/soZB0STe" class="special-link">청소부장</a>에게 연락바랍니다.</span></p> -->
+			<!-- </div> -->
+            <!-- </section> -->
+			
+			<div id="cooperation-section"></div>
+
+
+		
+
+
+		
+		<div class="button-container">
+		<button class="details-button" onclick="scrollToTop()">처음으로 가기</button>
+		</div><br>
+        <div id="current-time"></div>
+    </div>
+
+</body>
+
+
+    <footer id="footer">
+        <div class="container footer-content footer-background">
+            <div class="footer-section">
+                <h3>정보담당자</h3>
+                <ul>
+                    <li>군사/기술 담당자: <span class="gold-shine">우컁, Missile</span></li>
+                    <li>생존/기술 담당자: <span class="gold-shine">91</span></li>
+                    <li>속보담당자: <span class="gold-shine">속보만전보</span></li>
+                    <li>재난담당자: <span class="gold-shine">3개국, 전성준, 달빛</span></li>
+                    <li>중동지역 담당자: <span class="gold-shine">아랍 발 자료</span></li>
+                    <li>정보담당자: <span class="gold-shine">ATHENA</span></li>
+                    <li>군정보담당자: <span class="gold-shine">뿐빵뿡빵</span></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>함께 운영중인 채널</h3>
+                <ul>
+                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보 1(카톡 정보방)</a></li>
+					<li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2(카톡 대화방)</a></li>
+				    <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보(카페)</a></li>
+					<li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(뉴스 시트)</a></li>
+					<li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li>
+                    <li><a href="https://bit.ly/DisInfoTalkCafe" target="_blank">세계정세 재난정보대화방 (카페,멤버가능)</a></li>
+                </ul>
+            </div>
+
+			<div class="footer-section">
+				<h3>운영진</h3>
+				<!-- <p class="silver-shine">로켓맨</p>				 -->
+				<p class="silver-shine">달빛</p>
+				<p class="silver-shine">뿐빵뿡빵</p>
+				<p class="silver-shine">91</p>
+				<p class="silver-shine">ATHENA</p>
+				<!-- <p class="silver-shine">신루</p>				 -->
+				<h3>만든이</h3>
+                <p><a href="https://open.kakao.com/o/soZB0STe" class="silver-shine">청소부장</a></p>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script>
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
+
+	function scrollToFooter() {
+		const footer = document.querySelector('footer');
+		footer.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	// 스크롤 이벤트 리스너 추가
+	window.addEventListener('scroll', function() {
+		var backToTopButton = document.getElementById('back-to-top');
+		if (window.pageYOffset > 300) { // 300px 이상 스크롤되면 버튼 표시
+			backToTopButton.style.display = 'block';
+		} else {
+			backToTopButton.style.display = 'none';
+		}
+	});
+    // 현재 시간 표시
+		function updateTime() {
+			const now = new Date();
+			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+			document.getElementById('current-time').textContent = `${now.toLocaleString('ko-KR', options)}`;
+		}
+		setInterval(updateTime, 1000);
+
+
+     // 스크롤 진행률 표시 업데이트
+    window.onscroll = function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        var progressBar = document.getElementById("myBar");
+        progressBar.style.width = scrolled + "%";
+        progressBar.setAttribute('aria-valuenow', scrolled);
+    };
+
+    // 섹션 페이드인 효과
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const sections = document.querySelectorAll('.section');
+
+        const fadeInOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const fadeInObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = "translateY(0)";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, fadeInOptions);
+
+        sections.forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+            fadeInObserver.observe(section);
+        });
+    });
+
+		document.addEventListener("DOMContentLoaded", function() {
+			var lazyImages = [].slice.call(document.querySelectorAll("img.lazy-load"));
+
+			if ("IntersectionObserver" in window) {
+				let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+					entries.forEach(function(entry) {
+						if (entry.isIntersecting) {
+							let lazyImage = entry.target;
+							lazyImage.src = lazyImage.dataset.src;
+							lazyImage.classList.add("loaded");
+							lazyImageObserver.unobserve(lazyImage);
+						}
+					});
+				});
+
+				lazyImages.forEach(function(lazyImage) {
+					lazyImageObserver.observe(lazyImage);
+				});
+			} else {
+				// Fallback for browsers that don't support IntersectionObserver
+				let active = false;
+
+				const lazyLoad = function() {
+					if (active === false) {
+						active = true;
+
+						setTimeout(function() {
+							lazyImages.forEach(function(lazyImage) {
+								if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+									lazyImage.src = lazyImage.dataset.src;
+									lazyImage.classList.add("loaded");
+
+									lazyImages = lazyImages.filter(function(image) {
+										return image !== lazyImage;
+									});
+
+									if (lazyImages.length === 0) {
+										document.removeEventListener("scroll", lazyLoad);
+										window.removeEventListener("resize", lazyLoad);
+										window.removeEventListener("orientationchange", lazyLoad);
+									}
+								}
+							});
+
+							active = false;
+						}, 200);
+					}
+				};
+
+				document.addEventListener("scroll", lazyLoad);
+				window.addEventListener("resize", lazyLoad);
+				window.addEventListener("orientationchange", lazyLoad);
+				lazyLoad();
+			}
+		});
+
+        // 다루는 정보 항목 호버 효과
+        const infoItems = document.querySelectorAll('.info-item');
+        infoItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px)';
+                item.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                item.style.zIndex = '1';
+                infoItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.style.opacity = '0.5';
+                    }
+                });
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0)';
+                item.style.boxShadow = 'none';
+                item.style.zIndex = '0';
+                infoItems.forEach(otherItem => {
+                    otherItem.style.opacity = '1';
+                });
+            });
+        });
+		// 모바일에서 hover 효과를 터치로 대체
+		if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
+			const infoItems = document.querySelectorAll('.info-item');
+			infoItems.forEach(item => {
+				item.addEventListener('touchstart', () => {
+					item.style.transform = 'translateY(-5px)';
+					item.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+					item.style.zIndex = '1';
+					infoItems.forEach(otherItem => {
+						if (otherItem !== item) {
+							otherItem.style.opacity = '0.5';
+						}
+					});
+				});
+				item.addEventListener('touchend', () => {
+					setTimeout(() => {
+						item.style.transform = 'translateY(0)';
+						item.style.boxShadow = 'none';
+						item.style.zIndex = '0';
+						infoItems.forEach(otherItem => {
+							otherItem.style.opacity = '1';
+						});
+					}, 300);
+				});
+			});
+		}
+		function scrollToFooter() {
+			const footer = document.querySelector('footer');
+			footer.scrollIntoView({ behavior: 'smooth' });
+		}
+		function openModal(filePath) {
+			let modal = document.getElementById('myModal');
+			let iframe = document.getElementById('modalIframe');
+
+			modal.style.display = 'block';
+			iframe.src = filePath;
+		}
+
+		function closeModal() {
+			let modal = document.getElementById('myModal');
+			let iframe = document.getElementById('modalIframe');
+
+			// 모달 내용을 즉시 숨김
+			modal.style.opacity = '0';
+			modal.style.transition = 'opacity 0.5s';
+
+			// 2초 후에 모달을 완전히 닫고 iframe 소스를 지움
+			setTimeout(() => {
+				modal.style.display = 'none';
+				iframe.src = '';
+				modal.style.opacity = '1'; // 다음 열림을 위해 불투명도 초기화
+			}, 2000);
+		}
+
+		// 모달 외부 클릭시 닫기
+		window.onclick = function(event) {
+			let modal = document.getElementById('myModal');
+			if (event.target == modal) {
+				closeModal();
+			}
+		}
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			// 모바일 디바이스 확인
+			const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+
+			const tooltips = document.querySelectorAll('.tooltip');
+			
+			tooltips.forEach(tooltip => {
+				if (isMobile) {
+					// 모바일에서는 터치 이벤트 사용
+					let isTooltipVisible = false;
+					
+					tooltip.addEventListener('touchstart', function(e) {
+						e.preventDefault(); // 기본 터치 동작 방지
+						
+						// 모든 다른 툴팁 숨기기
+						tooltips.forEach(t => {
+							const tooltipText = t.querySelector('.tooltip-text');
+							if (tooltipText) {
+								tooltipText.style.visibility = 'hidden';
+								tooltipText.style.opacity = '0';
+							}
+						});
+						
+						// 현재 툴팁 토글
+						const tooltipText = this.querySelector('.tooltip-text');
+						if (tooltipText) {
+							if (isTooltipVisible) {
+								tooltipText.style.visibility = 'hidden';
+								tooltipText.style.opacity = '0';
+							} else {
+								tooltipText.style.visibility = 'visible';
+								tooltipText.style.opacity = '1';
+							}
+							isTooltipVisible = !isTooltipVisible;
+						}
+					});
+					
+					// 툴팁 외부 터치 시 닫기
+					document.addEventListener('touchstart', function(e) {
+						if (!tooltip.contains(e.target)) {
+							const tooltipText = tooltip.querySelector('.tooltip-text');
+							if (tooltipText) {
+								tooltipText.style.visibility = 'hidden';
+								tooltipText.style.opacity = '0';
+								isTooltipVisible = false;
+							}
+						}
+					});
+				} else {
+					// 데스크톱에서는 마우스 이벤트 사용
+					tooltip.addEventListener('mouseenter', function() {
+						const tooltipText = this.querySelector('.tooltip-text');
+						if (tooltipText) {
+							tooltipText.style.visibility = 'visible';
+							tooltipText.style.opacity = '1';
+						}
+					});
+
+					tooltip.addEventListener('mouseleave', function() {
+						const tooltipText = this.querySelector('.tooltip-text');
+						if (tooltipText) {
+							tooltipText.style.visibility = 'hidden';
+							tooltipText.style.opacity = '0';
+						}
+					});
+				}
+			});
+		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			const collapsibles = document.getElementsByClassName('collapsible');
+			
+			for (let i = 0; i < collapsibles.length; i++) {
+				collapsibles[i].addEventListener('click', function() {
+					this.classList.toggle('active');
+					const targetId = this.getAttribute('data-target');
+					const content = document.getElementById(targetId);
+					
+					if (content) {
+						if (content.classList.contains('show')) {
+							content.classList.remove('show');
+							content.style.maxHeight = null;
+						} else {
+							// 다른 열린 내용들 닫기 (선택적)
+							const allContents = document.getElementsByClassName('collapse-content');
+							for (let j = 0; j < allContents.length; j++) {
+								allContents[j].classList.remove('show');
+								allContents[j].style.maxHeight = null;
+							}
+							const allCollapsibles = document.getElementsByClassName('collapsible');
+							for (let j = 0; j < allCollapsibles.length; j++) {
+								allCollapsibles[j].classList.remove('active');
+							}
+							
+							// 현재 내용 열기
+							content.classList.add('show');
+							content.style.maxHeight = content.scrollHeight + "px";
+							this.classList.add('active');
+						}
+					}
+				});
+			}
+		});
+		
+		fetch('co-channel.html')
+		  .then(response => response.text())
+		  .then(data => {
+			document.getElementById('cooperation-section').innerHTML = data;
+		  })
+		  .catch(error => {
+			console.error('Error loading cooperation section:', error);
+		  });
+
+</script>
+</html>
