@@ -557,6 +557,7 @@
       position: absolute;
       z-index: 1;
       bottom: 125%; /* 기본 위치 */
+      transform: translateX(-5%); /* 중앙 정렬을 위한 변환 */
       opacity: 0;
       transition: opacity 0.3s;
       font-size: 0.9em;
@@ -737,16 +738,19 @@
 			  <div class="section-content">
         <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
 
-        <p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)</span>합니다.</p>
-        <p>닉네임은 <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>을 사용해야합니다.</p>
+        <p><span class="subtitle-part1"><strong>입장 즉시</strong></span>
+        <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>으로 1,2 방 동일하게 수정바랍니다.</p>
+        <p><span class="tooltip">
+              <span class="text-red"><strong>발음 할 수 없는 닉네임</strong></span>
+              <span class="tooltip-text">특수문자로만 구성 <br>예시) .(점) 또는 # 등 <br><br>자음/모음으로만 구성<br>zckh, ㄷㄹㅎㅁ</span>
+
+          </span>
+        </p>
+
         <p>
-            <span class="tooltip">
+        <span class="tooltip">
                 <span class="text-red"><strong>카톡자동생성 기본닉네임</strong></span>
-                <span class="tooltip-text">~무지, ~제이지 등<br><br>기본닉네임과 유사하지 않은 닉네임으로 변경<br>금지예시) 하늘 무지, 전쟁 제이지 등 </span>
-            </span>,
-            <span class="tooltip">
-                <span class="text-red"><strong>발음 할 수 없는 닉네임</strong></span>
-                <span class="tooltip-text">특수문자로만 구성 <br>예시) .(점) 또는 # 등 <br><br>자음/모음으로만 구성<br>zckh, ㄷㄹㅎㅁ</span>
+                <span class="tooltip-text">~무지, ~제이지 등<br><br>유사형태도 금지<br>금지예시) 하늘 무지, 전쟁 제이지 등 </span>
             </span>은 <span class="text-red">금지</span>합니다.
         </p>
 
@@ -758,7 +762,7 @@
 				</ul>
 				<p><span class="text-red">금지하는 닉네임 형태</span></p>
 				<ul>
-				 <li><span class="text-red">카톡자동생성 기본닉네임</span> ~무지, ~제이지 등 (유사해도 실수 강퇴 가능성)</li>
+				 <li><span class="text-red">카톡자동생성 기본닉네임</span> ~무지, ~제이지 등 (유사한 형태도 금지)</li>
 				 <li><span class="text-red">발음할 수 없는 형태</span> 초성(ㄱ,ㄴ)/ 자음 또는 모음만 구성/ 특수기호 등</li>
 				 <li><span class="text-red">그외 금지하는 형태</span> 욕설, 비속어, 운영진 사칭 등</li>
 				</ul>
