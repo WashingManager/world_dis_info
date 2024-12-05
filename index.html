@@ -546,41 +546,39 @@
             cursor: help;
         }
 
-        .tooltip .tooltip-text {
-		  visibility: hidden;
-		  width: 300px;
-		  background-color: #2c3e50;
-		  color: #fff;
-		  text-align: left;
-		  border-radius: 6px;
-		  padding: 10px;
-		  position: absolute;
-		  z-index: 1;
-		  bottom: 125%;
-		  left: 50%;
-		  transform: translateX(-50%);
-		  opacity: 0;
-		  transition: opacity 0.3s;
-		  font-size: 0.9em;
-		  line-height: 1.4;
-		  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-		}
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 300px; /* 기본 너비 */
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: left;
+      border-radius: 6px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* 기본 위치 */
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.9em;
+      line-height: 1.4;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
 
-        .tooltip .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #2c3e50 transparent transparent transparent;
-        }
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #2c3e50 transparent transparent transparent;
+    }
 
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
 		.tooltip .tooltip-text ul {
 			padding-left: 20px;
 			margin: 5px 0;
@@ -601,14 +599,13 @@
 			padding: 2px 4px;
 		}
 
-        /* 모바일에서는 툴팁을 터치로 활성화 */
-        @media (max-width: 768px) {
-            .tooltip .tooltip-text {
-                width: 200px; /* 모바일에서 더 좁은 너비 */
-				right: -100px; /* 오른쪽으로 약간 이동 */
-                font-size: 0.8em;
-            }
+    /* 모바일에서는 툴팁을 터치로 활성화 */
+    @media (max-width: 768px) {
+        .tooltip .tooltip-text {
+            width: 200px; /* 모바일에서 더 좁은 너비 */
+            font-size: 0.8em; /* 모바일에서 폰트 크기 조정 */
         }
+    }
 		/*접기 관련*/
 		.collapsible {
             cursor: pointer;
@@ -664,6 +661,8 @@
             }
         }
 
+
+
     </style>
 </head>
 <body>
@@ -685,13 +684,8 @@
 		    <section class="section" aria-labelledby="chat-rules">
 			<div class="section-content">
                 <h2 id="chat-rules">비상 계엄 선포</h2>
-				<p>윤석열 대통령은 2024년 12월 3일 긴급 대국민 담화를 통해 비상계엄을 선포했습니다. 대통령은 국회가 정부 출범 이후 22건의 관료 탄핵 소추를 발의하며, 이는 세계적으로 유례가 없는 상황이라고 지적했습니다. 그는 국회가 사법 및 행정 시스템을 마비시키고, 자유민주주의 체제를 위협하는 반국가 행위를 하고 있다고 비판했습니다.</p>
+				        <p>윤석열 대통령은 2024년 12월 3일 긴급 대국민 담화를 통해 비상계엄을 선포했습니다. 대통령은 국회가 정부 출범 이후 22건의 관료 탄핵 소추를 발의하며, 이는 세계적으로 유례가 없는 상황이라고 지적했습니다. 그는 국회가 사법 및 행정 시스템을 마비시키고, 자유민주주의 체제를 위협하는 반국가 행위를 하고 있다고 비판했습니다.</p>
                 <p>대통령은 이러한 상황이 국가의 헌정 질서를 무너뜨리고 내란을 획책하는 명백한 반국가 행위라고 규정하며, 북한 공산 세력의 위협으로부터 자유 대한민국을 수호하고자 비상계엄을 선포한다고 밝혔습니다. 그는 반국가 세력을 척결하고 국가를 정상화시키겠다고 강조했습니다.</p>
-				<!-- <ul> -->
-					<!-- <li><span class="bg-light-orange">단순 무지성 질문은 지양</span>('전쟁나요?', '언제 전쟁나요?')</li> -->
-					<!-- <li>'질문 의도나 의미'를 밝힌 후 질문하면 보다 양질의 답변을 기대할 수 있습니다.</li> -->
-					<!-- <li><span class="bg-very-light-green">질문하기 전 먼저 자주 묻는 질문(FAQ)을 보시고 질문바랍니다.</span></li> -->
-				<!-- </ul> -->
 			<div class="button-container">
 				<button class="details-button" onclick="openModal('EmergencyAccordion.html')">비상계엄 선포정보</button>
 				<!--<button class="details-button" onclick="openModal('thirdFile.html')">정문정답(QNA)</button>-->
@@ -707,7 +701,7 @@
 					<ul>
 						<li>정보 공유 전용 <a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1 정보방(카톡)</a>
 						<li>대화 목적 전용 <a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2 대화방(카톡)</a>
-						<li>주제키워드 뉴스 아카이브<a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보 (카페)</a> 
+						<li>주제키워드 뉴스 아카이브<a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보 (카페)</a>
 					</ul>
 					<p class="bg-very-light-green">모든 정보는 1방에 공유하며 대화는 2방에서 가능합니다.</p>
 					<p class="bg-light-purple">우리채널의 주기능은 <strong>'정보공유'</strong>입니다.</p>
@@ -725,7 +719,7 @@
                 <p>상대존중은 표면적 대화체 뿐 아니라 태도와 보이지 않는 마음까지 아우릅니다.</p>
                 <ul>
                     <li>대화체는 <span class="tooltip">문장 마침이 되는 형태와 존댓말<span class="tooltip-text">~다., ~요 등</span></span> 사용을 기본으로 합니다.</li>
-                    <li><span class="tooltip">음슴체<span class="tooltip-text">예시)<br>김정은이 발사 현장 참관함<br> 해군 김명식과 미사일총국 병사들도 참관함<br> 국가 핵무력 완성 선포함</span>는 정보를 간추려 전할 때 사용합니다.</span></li>
+                    <li><span class="tooltip">음슴체<span class="tooltip-text">예시)<br>김정은이 발사 현장 참관함<br> 해군 김명식도 참관함<br> 국가 핵무력 완성 선포함</span>는 정보를 간추려 전할 때 사용합니다.</span></li>
                     <li><span class="text-red"><span class="tooltip">독백체, 말줄임체, <span class="tooltip-text">독백체, 말줄임체 예시) <br>~한듯, ~한데 등 어미를 흐리는 표현<br><br>끊어쓰기 예시)<br>그런데<br>왜<br>~할까요?<br></span>끊어쓰기는 금지합니다.(오해 및 혼란 방지)</span></span></li>
                 </ul>
                     <p><span class="bg-light-red-2">방주제 특성상 비상 시 인원 유입이 많아지며, 혼잡도와 긴장도에 따라 자체 대응매뉴얼대로 운영합니다.</span></p>
@@ -739,13 +733,22 @@
 					</div>
 				</div>
 
-            <section class="section" aria-labelledby="nickname-rules">
-			<div class="section-content">
-                <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
+        <section class="section" aria-labelledby="nickname-rules">
+			  <div class="section-content">
+        <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
 
-				<p>실명이 아닌 닉네임을 사용하는 대화방 특성상 <span class="text-deep-blue"><strong>호명가능한 닉네임</strong></span>을 사용해야하며 <span class="text-red"><span class="tooltip"><strong>카톡자동생성 기본닉네임</strong><span class="tooltip-text">~무지, ~제이지 등</span></span></span>과 <span class="text-red"><span class="tooltip"><strong>발음 할 수 없는 닉네임</strong><span class="tooltip-text">특수문자 또는 자음/모음으로만 이루어진 경우<br>zckh, ㄷㄹㅎㅁ, .(점) 등</span></span></span>은 <span class="text-red">금지</span>합니다.</span></p>
-				<p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)</span>합니다.</p>
-				<p></p>
+        <p><span class="subtitle-part1"><strong>입장 즉시</strong></span> <span class="bg-light-yellow">중복되지 않는 개별닉네임으로 변경(1, 2방 동일닉네임)</span>합니다.</p>
+        <p>닉네임은 <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>을 사용해야합니다.</p>
+        <p>
+            <span class="tooltip">
+                <span class="text-red"><strong>카톡자동생성 기본닉네임</strong></span>
+                <span class="tooltip-text">~무지, ~제이지 등<br><br>기본닉네임과 유사하지 않은 닉네임으로 변경<br>금지예시) 하늘 무지, 전쟁 제이지 등 </span>
+            </span>,
+            <span class="tooltip">
+                <span class="text-red"><strong>발음 할 수 없는 닉네임</strong></span>
+                <span class="tooltip-text">특수문자로만 구성 <br>예시) .(점) 또는 # 등 <br><br>자음/모음으로만 구성<br>zckh, ㄷㄹㅎㅁ</span>
+            </span>은 <span class="text-red">금지</span>합니다.
+        </p>
 
 				<p><span class="text-deep-blue">허용되는 닉네임</span></p>
 				<ul>
@@ -814,27 +817,27 @@
 					<p>우리 채널은 <span class="tooltip"><strong>공식 채널 정보</strong><span class="tooltip-text">언론사 뉴스 및 공식채널, 전문가 견해 등</span></span>를 우선하여 공유합니다.</p>
 
 					<h3 id="non-topics">개인채널 정보</h3>
-					
+
 					<p>공식 채널 정보를 우선하되 <span class="bg-very-light-green">개인 채널(유튜브, 블로그 등)정보 공유 시 아래 조건을 만족</span>해야 합니다.</p>
-					
+
 					<ul>
 						<li>해당 정보의 출처와 근거가 뚜렷한 경우</li>
 						<li><span class="bg-very-light-green">정리된 요점 먼저 공유한 후 채널 링크 공유(선 요점, 후 링크)</span></li>
 					</ul>
-					
+
 					<span class="bg-light-orange">즉, 공유자가 요점을 파악하고 정리된 정보만 공유 가능</span><br>
 					<span class="text-red">※요점 정리 없는 개인 채널 정보는 즉시 가림</span>
-					
-						
-		
+
+
+
 					<h3 id="non-topics">비주제</h3>
 					<ul>
 						<li>정세와 무관한 국내정치 및 소모적 정쟁 및 연예계, 스포츠 등</li>
 						<li>예언, 정치, 종교 소재는 대화방에서 불가하며 정리된 자료에 한해 카페<a href="https://bit.ly/WorldDisinfo" target="_blank" rel="noopener noreferrer" class="special-link">주장게시판</a>에 근거와 요점이 정리된 글 게시만 허용</li>
 						<li>그외 비주제 소재는 [비주제] 말머리를 붙여서 <a href="https://bit.ly/Disinfo1" target="_blank" rel="noopener noreferrer" class="special-link">1방</a>에 공유(신선도 고려)</li>
 						<li>가짜 뉴스 확인하는 방법 출처: <a href="https://www.ifla.org/wp-content/uploads/2019/05/assets/faife/images/how_to_spot_fake_news_korean.pdf" target="_blank" rel="noopener noreferrer" class="special-link">International Federation of Library Associations and Institutions (IFLA)</a></li>
-						
-						
+
+
 					</ul>
 				</div>
 			</div>
@@ -851,11 +854,10 @@
 						<li><span class="tooltip">확정적 예언<span class="tooltip-text">개인의 주관적 표현이 아닌 '00년 0월0일 ~한다' 예언성 발언</span>, 편향적 정치발언 시</span></li>
 						<li><span class="collapsible" data-target="content3">혐오 및 감정적 표현 등 불안, 분란조장 시</span></li>
 						<div id="content3" class="collapse-content">
-						
+
 						<p>개인의 단발적인 불안 표현은 가능<br>(단, 잦은 빈도로 방 분위기 해칠 경우 운영진 개입)</p>
-						
 						<p>정세를 통찰하여 나름의 근거를 통한 전쟁 예상은 허용</p>
-						
+
 						<p><span class="bg-light-red-2">금지 예시)</span> '동일인의 지속된 불안표현', '특정 고문 행위 묘사' 등 불안을 야기하고 확산시키는 발언은 <strong>불안감 조성으로 간주</strong>하며, 그외 방 분위기를 해치는 활동은 <span class="text-red">운영진 개입</span><p>
 						<p><span class="bg-light-green">허용 예시)</span> '요즘 정세를 보고 있으면 마치 전쟁을 준비하고 있는 것 같다.', '어제 전쟁하는 꿈을 꾸었다.', '밖에서 폭발음이 들렸다' 등 <strong>문제되지 않으나 빈도가 잦으면 문제로 간주</strong><p>
 						<p>관심성(어그로성) + 무례한 태도로 기존 대화 흐름을 방해하거나 상대를 수용하지 않는 일방적 대화태도로 방 분위기를 해치는 활동을 분란으로 규정.<p>
@@ -881,27 +883,140 @@
 			</div>
 			</div>
             </section>
-			<!-- <section class="section" aria-labelledby="chat-rules"> -->
-				<!-- <div class="section-content"> -->
-                <!-- <h2 id="chat-rules">협력채널</h2> -->
-				<!-- <p>아래의 협력채널은 우리채널과 각 방의 방장이 협력하는 채널입니다.</p> -->
-				
-				<!-- <ul> -->
-                    <!-- <li><a href="https://open.kakao.com/o/gWFhrY1d" target="_blank" rel="noopener noreferrer" class="special-link"><span class="tooltip">국제정세 상황 공유, 토론방(우크라이나-러시아 등)<span class="tooltip-text"></span></span></a></li> -->
-					<!-- <li><a href="https://open.kakao.com/o/gWFhrY1d" target="_blank" rel="noopener noreferrer" class="special-link">국제정세 상황 공유, 토론방(우크라이나-러시아 등)</a></li> -->
-					<!-- <li><a href="https://open.kakao.com/o/g86P3fpe" target="_blank" rel="noopener noreferrer" class="special-link">사회*철학*종교*세계토론방</a></li> -->
-                <!-- </ul> -->
-                <!-- <p><span class="bg-light-purple">정보공유를 위해 협력을 원하는 채널은<a href="https://open.kakao.com/o/soZB0STe" class="special-link">청소부장</a>에게 연락바랍니다.</span></p> -->
-			<!-- </div> -->
-            <!-- </section> -->
-			
-			<div id="cooperation-section"></div>
+   		<div id="cooperation-section"></div>
 
 
-		
+      <section class="section" aria-labelledby="reference-link">
+        <div class="section-content">
+          <h2 id="reference-link">재난대비 참고링크</h2>
+          <p>국민재난안전포탈</p>
+
+          <ul>
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/main/main.html" target="_blank" class="custom-link">국민재난안전포탈</a>
+                <span class="tooltip-text">재난 및 안전 관련 종합 정보 제공 (메인페이지)</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/sfc/dis/disasterMsgList.jsp?emgPage=Y&menuSeq=679" target="_blank" class="custom-link">재난문자 현황</a>
+                <span class="tooltip-text">재해구분, 대상지역 선택 후 재난문자 내역 확인 가능</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1402.html?menuSeq=57" target="_blank" class="custom-link">대피시설(조회)</a>
+                <span class="tooltip-text">
+                  시도, 시군구 별 대피시설 정보 파악 가능<br>
+                  거주 지역 선택 후 주변 대피소 파악하여 미리 방문
+                </span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1401.html?menuSeq=56" target="_blank" class="custom-link">급수시설(조회)</a>
+                <span class="tooltip-text">
+                  시도, 시군구 별로 급수시설 정보 파악 가능<br>
+                  거주 지역 선택 후 주변 급수시설 파악(여러 곳 파악)
+                </span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/prevent/SDIJKM5105.html?menuSeq=787" target="_blank" class="custom-link">민방공 경보 시 행동요령</a>
+                <span class="tooltip-text">민방공 경보 발령 시 행동 요령 안내</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1301.html?menuSeq=53" target="_blank" class="custom-link">민방위 경보 종류와 신호방법</a>
+                <span class="tooltip-text">민방위 경보의 종류와 신호 방법 설명</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1604.html?menuSeq=876" target="_blank" class="custom-link">화생방 대비</a>
+                <span class="tooltip-text">
+                  화생방 상황 대비한 「일반 방독면」은 산업통상자원부에서 규정한 국가표준(KS)과 규격인증 「KS M 6685」을 확인 후 구매<br>
+                  ※방독면 착용법 확인
+                </span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/prevent/SDIJK14433.html?cd1=33&cd2=999&pagecd=SDIJK144.33&menuSeq=128" target="_blank" class="custom-link">응급처치</a>
+                <span class="tooltip-text">119 생활응급처치 매뉴얼, 심폐소생술, 기도폐쇄, 출혈, 골절 등에 대한 자료제공</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/prevent/SDIJKM5215.html?menuSeq=379" target="_blank" class="custom-link">비상대비용품</a>
+                <span class="tooltip-text">비상 대비를 위한 필수 용품 목록 안내</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/csc/bbs_conf.jsp?menuSeq=593&bbs_no=9&viewtype=read&bbs_ordr=2615" target="_blank" class="custom-link">비상시 국민행동요령</a>
+                <span class="tooltip-text">
+                  <파일 다운로드 가능>
+                  <br>
+                  비상시국민행동요령(비상대비물자).pdf<br>
+                  비상시국민행동요령_종합.z02<br>
+                  비상시국민행동요령(비상사태).pdf<br>
+                  비상시국민행동요령(인명 시설 피해시).pdf<br>
+                  비상시국민행동요령(화생방).pdf<br>
+                  비상시국민행동요령_종합.zip<br>
+                  비상시국민행동요령_종합.z01
+                </span>
+              </span>
+            </li>
+          </ul>
+
+            <p>기상청</p>
+            <ul>
+            <li>
+              <span class="tooltip">
+                <a href="https://www.weather.go.kr/w/eqk-vol/baro/phenom.do" target="_blank" class="custom-link">지진·화산 행동요령</a>
+                <span class="tooltip-text">지진 및 화산 발생 시 행동 요령 안내</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.weather.go.kr/w/eqk-vol/recent-eqk.do" target="_blank" class="custom-link">최근지진(기상청)</a>
+                <span class="tooltip-text">최근 발생한 지진 정보 제공</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.weather.go.kr/w/typhoon/ko/weather/typhoon_02.jsp" target="_blank" class="custom-link">태풍정보(기상청)</a>
+                <span class="tooltip-text">현재 태풍 관련 정보 제공</span>
+              </span>
+            </li>
+
+            <li>
+              <span class="tooltip">
+                <a href="https://www.weather.go.kr/wgis-nuri/html/map.html" target="_blank" class="custom-link">기상정보</a>
+                <span class="tooltip-text">실시간 기상 정보 확인 가능</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
 
-		
+
 		<div class="button-container">
 		<button class="details-button" onclick="scrollToTop()">처음으로 가기</button>
 		</div><br>
@@ -929,10 +1044,10 @@
                 <h3>함께 운영중인 채널</h3>
                 <ul>
                     <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보 1(카톡 정보방)</a></li>
-					<li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2(카톡 대화방)</a></li>
-				    <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보(카페)</a></li>
-					<li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(뉴스 시트)</a></li>
-					<li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li>
+					          <li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2(카톡 대화방)</a></li>
+				            <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보(카페)</a></li>
+					          <li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(뉴스 시트)</a></li>
+					          <li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li>
                     <li><a href="https://bit.ly/DisInfoTalkCafe" target="_blank">세계정세 재난정보대화방 (카페,멤버가능)</a></li>
                 </ul>
             </div>
@@ -1159,85 +1274,107 @@
 				closeModal();
 			}
 		}
-		
-		document.addEventListener('DOMContentLoaded', function() {
-			// 모바일 디바이스 확인
-			const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
 
-			const tooltips = document.querySelectorAll('.tooltip');
-			
-			tooltips.forEach(tooltip => {
-				if (isMobile) {
-					// 모바일에서는 터치 이벤트 사용
-					let isTooltipVisible = false;
-					
-					tooltip.addEventListener('touchstart', function(e) {
-						e.preventDefault(); // 기본 터치 동작 방지
-						
-						// 모든 다른 툴팁 숨기기
-						tooltips.forEach(t => {
-							const tooltipText = t.querySelector('.tooltip-text');
-							if (tooltipText) {
-								tooltipText.style.visibility = 'hidden';
-								tooltipText.style.opacity = '0';
-							}
-						});
-						
-						// 현재 툴팁 토글
-						const tooltipText = this.querySelector('.tooltip-text');
-						if (tooltipText) {
-							if (isTooltipVisible) {
-								tooltipText.style.visibility = 'hidden';
-								tooltipText.style.opacity = '0';
-							} else {
-								tooltipText.style.visibility = 'visible';
-								tooltipText.style.opacity = '1';
-							}
-							isTooltipVisible = !isTooltipVisible;
-						}
-					});
-					
-					// 툴팁 외부 터치 시 닫기
-					document.addEventListener('touchstart', function(e) {
-						if (!tooltip.contains(e.target)) {
-							const tooltipText = tooltip.querySelector('.tooltip-text');
-							if (tooltipText) {
-								tooltipText.style.visibility = 'hidden';
-								tooltipText.style.opacity = '0';
-								isTooltipVisible = false;
-							}
-						}
-					});
-				} else {
-					// 데스크톱에서는 마우스 이벤트 사용
-					tooltip.addEventListener('mouseenter', function() {
-						const tooltipText = this.querySelector('.tooltip-text');
-						if (tooltipText) {
-							tooltipText.style.visibility = 'visible';
-							tooltipText.style.opacity = '1';
-						}
-					});
+    document.addEventListener('DOMContentLoaded', function() {
+        const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        const tooltips = document.querySelectorAll('.tooltip');
 
-					tooltip.addEventListener('mouseleave', function() {
-						const tooltipText = this.querySelector('.tooltip-text');
-						if (tooltipText) {
-							tooltipText.style.visibility = 'hidden';
-							tooltipText.style.opacity = '0';
-						}
-					});
-				}
-			});
-		});
-		
+        tooltips.forEach(tooltip => {
+            const tooltipText = tooltip.querySelector('.tooltip-text');
+
+            if (isMobile) {
+                let isTooltipVisible = false;
+
+                tooltip.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+
+                    // 모든 다른 툴팁 숨기기
+                    tooltips.forEach(t => {
+                        const tText = t.querySelector('.tooltip-text');
+                        if (tText) {
+                            tText.style.visibility = 'hidden';
+                            tText.style.opacity = '0';
+                        }
+                    });
+
+                    // 현재 툴팁 토글
+                    if (tooltipText) {
+                        if (isTooltipVisible) {
+                            tooltipText.style.visibility = 'hidden';
+                            tooltipText.style.opacity = '0';
+                        } else {
+                            // 모바일에서 툴팁 위치 조정
+                            const rect = this.getBoundingClientRect();
+                            const tooltipWidth = tooltipText.offsetWidth;
+
+                            // 중앙 정렬
+                            let leftPosition = rect.left + rect.width / 1 - tooltipWidth / 1;
+
+                            // 화면 경계 확인
+                            if (leftPosition < 0) {
+                                leftPosition = 1; // 왼쪽 경계에 맞춤
+                            } else if (leftPosition + tooltipWidth > window.innerWidth) {
+                                leftPosition = window.innerWidth - tooltipWidth - 1; // 오른쪽 여백을 두고 이동
+                            }
+
+                            tooltipText.style.left = `${leftPosition}px`;
+                            tooltipText.style.visibility = 'visible';
+                            tooltipText.style.opacity = '1';
+                        }
+                        isTooltipVisible = !isTooltipVisible;
+                    }
+                });
+
+                document.addEventListener('touchstart', function(e) {
+                    if (!tooltip.contains(e.target)) {
+                        if (tooltipText) {
+                            tooltipText.style.visibility = 'hidden';
+                            tooltipText.style.opacity = '0';
+                            isTooltipVisible = false;
+                        }
+                    }
+                });
+            } else {
+                tooltip.addEventListener('mouseenter', function() {
+                    if (tooltipText) {
+                        const rect = this.getBoundingClientRect();
+                        const tooltipWidth = tooltipText.offsetWidth;
+
+                        // 중앙 정렬
+                        let leftPosition = rect.left + rect.width / 1 - tooltipWidth / 1;
+
+                        // 화면 경계 확인
+                        if (leftPosition < 0) {
+                            leftPosition = 1; // 왼쪽 경계에 맞춤
+                        } else if (leftPosition + tooltipWidth > window.innerWidth) {
+                            leftPosition = window.innerWidth - tooltipWidth - 1; // 오른쪽 여백을 두고 이동
+                        }
+
+                        tooltipText.style.left = `${leftPosition}px`;
+                        tooltipText.style.visibility = 'visible';
+                        tooltipText.style.opacity = '1';
+                    }
+                });
+
+                tooltip.addEventListener('mouseleave', function() {
+                    if (tooltipText) {
+                        tooltipText.style.visibility = 'hidden';
+                        tooltipText.style.opacity = '0';
+                    }
+                });
+            }
+        });
+    });
+
 		document.addEventListener('DOMContentLoaded', function() {
 			const collapsibles = document.getElementsByClassName('collapsible');
-			
+
 			for (let i = 0; i < collapsibles.length; i++) {
 				collapsibles[i].addEventListener('click', function() {
 					this.classList.toggle('active');
 					const targetId = this.getAttribute('data-target');
 					const content = document.getElementById(targetId);
-					
+
 					if (content) {
 						if (content.classList.contains('show')) {
 							content.classList.remove('show');
@@ -1253,7 +1390,7 @@
 							for (let j = 0; j < allCollapsibles.length; j++) {
 								allCollapsibles[j].classList.remove('active');
 							}
-							
+
 							// 현재 내용 열기
 							content.classList.add('show');
 							content.style.maxHeight = content.scrollHeight + "px";
@@ -1263,7 +1400,7 @@
 				});
 			}
 		});
-		
+
 		fetch('co-channel.html')
 		  .then(response => response.text())
 		  .then(data => {
