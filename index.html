@@ -609,31 +609,40 @@
     }
 		/*접기 관련*/
 		.collapsible {
-            cursor: pointer;
-            border-bottom: 1px dotted #666;
-            color: #2c3e50;
-            position: relative;
-            display: inline-block;
-        }
+      cursor: pointer;
+      border-bottom: 1px dotted #666;
+      color: #2c3e50;
+      position: relative;
+      display: inline-block;
+     }
 
-        .collapse-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            margin-top: 5px;
-            padding: 0 15px;
+
+    .collapse-content {
+      width: 100%;
+      box-sizing: border-box;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      margin-top: 5px;
+      padding: 0 15px;
 			visibility: hidden;
 			opacity: 0;
 			transition: visibility 0s linear 300ms, opacity 300ms;
-        }
+      }
 
-        .collapse-content.show {
-            max-height: 500px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      .collapse-content .section-content {
+          width: 100%;
+          padding: 15px;
+          box-sizing: border-box;
+      }
+
+    .collapse-content.show {
+      max-height: 500px;
+      padding: 15px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 			visibility: visible;
 			opacity: 1;
 			transition: visibility 0s linear 0s, opacity 300ms;
@@ -662,8 +671,36 @@
             }
         }
 
+        .collapse-content {
+            max-height: 0; /* 기본적으로 접혀 있음 */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out; /* 부드러운 애니메이션 효과 */
+        }
 
+        .collapse-content.show {
+            max-height: 500px; /* 펼쳐졌을 때 최대 높이 (필요에 따라 조정) */
+        }
 
+        /*접기 이름*/
+        .collapsible-header {
+          cursor: pointer;
+          border-bottom: 1px dotted #666;
+          color: #2c3e50;
+          position: relative;
+          display: inline-block;
+          left:12px;
+        }
+
+        .collapsible-header::after {
+          content: '▼';
+          font-size: 0.7em;
+          margin-left: 5px;
+          transition: transform 0.3s;
+        }
+
+        .collapsible-header.active::after {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -682,17 +719,18 @@
     <main role="main">
 
 
-		    <section class="section" aria-labelledby="chat-rules">
-			<div class="section-content">
-                <h2 id="chat-rules">비상 계엄 선포</h2>
-				        <p>윤석열 대통령은 2024년 12월 3일 긴급 대국민 담화를 통해 비상계엄을 선포했습니다. 대통령은 국회가 정부 출범 이후 22건의 관료 탄핵 소추를 발의하며, 이는 세계적으로 유례가 없는 상황이라고 지적했습니다. 그는 국회가 사법 및 행정 시스템을 마비시키고, 자유민주주의 체제를 위협하는 반국가 행위를 하고 있다고 비판했습니다.</p>
-                <p>대통령은 이러한 상황이 국가의 헌정 질서를 무너뜨리고 내란을 획책하는 명백한 반국가 행위라고 규정하며, 북한 공산 세력의 위협으로부터 자유 대한민국을 수호하고자 비상계엄을 선포한다고 밝혔습니다. 그는 반국가 세력을 척결하고 국가를 정상화시키겠다고 강조했습니다.</p>
-			<div class="button-container">
-				<button class="details-button" onclick="openModal('EmergencyAccordion.html')">비상계엄 선포정보</button>
-				<!--<button class="details-button" onclick="openModal('thirdFile.html')">정문정답(QNA)</button>-->
-			</div>
-			</div>
-            </section>
+      <section class="section" aria-labelledby="chat-rules">
+  <h2 id="chat-rules" class="collapsible-header" data-target="emergency-details">비상 계엄 선포</h2>
+  <div id="emergency-details" class="collapse-content">
+      <div class="section-content">
+          <p>윤석열 대통령은 2024년 12월 3일 긴급 대국민 담화를 통해 비상계엄을 선포했습니다. 대통령은 국회가 정부 출범 이후 22건의 관료 탄핵 소추를 발의하며, 이는 세계적으로 유례가 없는 상황이라고 지적했습니다. 그는 국회가 사법 및 행정 시스템을 마비시키고, 자유민주주의 체제를 위협하는 반국가 행위를 하고 있다고 비판했습니다.</p>
+          <p>대통령은 이러한 상황이 국가의 헌정 질서를 무너뜨리고 내란을 획책하는 명백한 반국가 행위라고 규정하며, 북한 공산 세력의 위협으로부터 자유 대한민국을 수호하고자 비상계엄을 선포한다고 밝혔습니다. 그는 반국가 세력을 척결하고 국가를 정상화시키겠다고 강조했습니다.</p>
+          <div class="button-container">
+              <button class="details-button" onclick="openModal('EmergencyAccordion.html')">비상계엄 선포정보</button>
+          </div>
+      </div>
+  </div>
+</section>
 
         <div class="container">
             <section class="section" aria-labelledby="channel-intro">
@@ -891,8 +929,9 @@
 
 
       <section class="section" aria-labelledby="reference-link">
-        <div class="section-content">
-          <h2 id="reference-link">재난대비 참고링크</h2>
+        <h2 id="reference-link" class="collapsible-header" data-target="reference-details">재난대비 참고링크</h2>
+        <div id="reference-details" class="collapse-content">
+          <div class="section-content">
           <p><span class="tooltip">
             <a href="https://www.safekorea.go.kr/idsiSFK/neo/main/main.html" target="_blank" class="custom-link">국민재난안전포탈</a>
             <span class="tooltip-text">국민재난안전포탈 공식페이지<br>재난 및 안전 관련 종합 정보 제공</span>
@@ -1041,11 +1080,10 @@
             </li>
           </ul>
         </div>
+        </div>
       </section>
 
-
-
-		<div class="button-container">
+  <div class="button-container">
 		<button class="details-button" onclick="scrollToTop()">처음으로 가기</button>
 		</div><br>
         <div id="current-time"></div>
@@ -1443,6 +1481,41 @@
 				});
 			}
 		});
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const collapsibles = document.getElementsByClassName('collapsible-header');
+
+        for (let i = 0; i < collapsibles.length; i++) {
+            collapsibles[i].addEventListener('click', function() {
+                this.classList.toggle('active');
+                const targetId = this.getAttribute('data-target');
+                const content = document.getElementById(targetId);
+
+                if (content) {
+                    if (content.classList.contains('show')) {
+                        content.classList.remove('show');
+                        content.style.maxHeight = null;
+                    } else {
+                        // 다른 열린 내용들 닫기 (선택적)
+                        const allContents = document.getElementsByClassName('collapse-content');
+                        for (let j = 0; j < allContents.length; j++) {
+                            allContents[j].classList.remove('show');
+                            allContents[j].style.maxHeight = null;
+                        }
+                        const allCollapsibles = document.getElementsByClassName('collapsible-header');
+                        for (let j = 0; j < allCollapsibles.length; j++) {
+                            allCollapsibles[j].classList.remove('active');
+                        }
+
+                        // 현재 내용 열기
+                        content.classList.add('show');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        this.classList.add('active');
+                    }
+                }
+            });
+        }
+    });
 
 		fetch('co-channel.html')
 		  .then(response => response.text())
