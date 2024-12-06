@@ -585,7 +585,7 @@
 			margin: 5px 0;
 		}
 		.tooltip .tooltip-text li {
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 		}
 		.tooltip .tooltip-text .text-deep-blue {
 			color: #0000FF;
@@ -739,7 +739,7 @@
         <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
 
         <p><span class="subtitle-part1"><strong>입장 즉시</strong></span>
-        <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>으로 1,2 방 동일하게 수정바랍니다.</p>
+        <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>으로 1, 2 방 동일하게 수정바랍니다.</p>
         <p><span class="tooltip">
               <span class="text-red"><strong>발음 할 수 없는 닉네임</strong></span>
               <span class="tooltip-text">특수문자로만 구성 <br>예시) .(점) 또는 # 등 <br><br>자음/모음으로만 구성<br>zckh, ㄷㄹㅎㅁ</span>
@@ -1285,50 +1285,65 @@
 
         tooltips.forEach(tooltip => {
             const tooltipText = tooltip.querySelector('.tooltip-text');
+            const link = tooltip.querySelector('a');
+            let isTooltipVisible = false;
+            let lastTapTime = 0;
 
             if (isMobile) {
-                let isTooltipVisible = false;
-
                 tooltip.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
+                    const currentTime = new Date().getTime();
+                    const tapLength = currentTime - lastTapTime;
 
-                    // 모든 다른 툴팁 숨기기
-                    tooltips.forEach(t => {
-                        const tText = t.querySelector('.tooltip-text');
-                        if (tText) {
-                            tText.style.visibility = 'hidden';
-                            tText.style.opacity = '0';
+                    if (tapLength < 1000 && tapLength > 0) {
+                        // 더블 탭: 링크로 이동
+                        e.preventDefault();
+                        if (link) {
+                            window.location.href = link.href;
                         }
-                    });
+                    } else {
+                        // 싱글 탭: 툴팁 토글
+                        e.preventDefault();
 
-                    // 현재 툴팁 토글
-                    if (tooltipText) {
-                        if (isTooltipVisible) {
-                            tooltipText.style.visibility = 'hidden';
-                            tooltipText.style.opacity = '0';
-                        } else {
-                            // 모바일에서 툴팁 위치 조정
-                            const rect = this.getBoundingClientRect();
-                            const tooltipWidth = tooltipText.offsetWidth;
-
-                            // 중앙 정렬
-                            let leftPosition = rect.left + rect.width / 1 - tooltipWidth / 1;
-
-                            // 화면 경계 확인
-                            if (leftPosition < 0) {
-                                leftPosition = 1; // 왼쪽 경계에 맞춤
-                            } else if (leftPosition + tooltipWidth > window.innerWidth) {
-                                leftPosition = window.innerWidth - tooltipWidth - 1; // 오른쪽 여백을 두고 이동
+                        // 모든 다른 툴팁 숨기기
+                        tooltips.forEach(t => {
+                            const tText = t.querySelector('.tooltip-text');
+                            if (tText && t !== tooltip) {
+                                tText.style.visibility = 'hidden';
+                                tText.style.opacity = '0';
                             }
+                        });
 
-                            tooltipText.style.left = `${leftPosition}px`;
-                            tooltipText.style.visibility = 'visible';
-                            tooltipText.style.opacity = '1';
+                        // 현재 툴팁 토글
+                        if (tooltipText) {
+                            if (isTooltipVisible) {
+                                tooltipText.style.visibility = 'hidden';
+                                tooltipText.style.opacity = '0';
+                            } else {
+                                // 모바일에서 툴팁 위치 조정
+                                const rect = this.getBoundingClientRect();
+                                const tooltipWidth = tooltipText.offsetWidth;
+
+                                // 중앙 정렬
+                                let leftPosition = rect.left + rect.width / 2 - tooltipWidth / 2;
+
+                                // 화면 경계 확인
+                                if (leftPosition < 0) {
+                                    leftPosition = 1; // 왼쪽 경계에 맞춤
+                                } else if (leftPosition + tooltipWidth > window.innerWidth) {
+                                    leftPosition = window.innerWidth - tooltipWidth - 1; // 오른쪽 여백을 두고 이동
+                                }
+
+                                tooltipText.style.left = `${leftPosition}px`;
+                                tooltipText.style.visibility = 'visible';
+                                tooltipText.style.opacity = '1';
+                            }
+                            isTooltipVisible = !isTooltipVisible;
                         }
-                        isTooltipVisible = !isTooltipVisible;
                     }
+                    lastTapTime = currentTime;
                 });
 
+                // 툴팁 외부를 터치하면 툴팁 닫기
                 document.addEventListener('touchstart', function(e) {
                     if (!tooltip.contains(e.target)) {
                         if (tooltipText) {
@@ -1345,7 +1360,7 @@
                         const tooltipWidth = tooltipText.offsetWidth;
 
                         // 중앙 정렬
-                        let leftPosition = rect.left + rect.width / 1 - tooltipWidth / 1;
+                        let leftPosition = rect.left + rect.width / 2 - tooltipWidth / 2;
 
                         // 화면 경계 확인
                         if (leftPosition < 0) {
