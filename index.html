@@ -226,6 +226,21 @@
 		.footer-section ul li a:hover {
 			color: var(--gold);
 		}
+    .footer-section h3,
+    .footer-section summary {
+        color: #fff;
+        border-bottom: 2px solid #fff;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .footer-section details {
+        margin-bottom: 10px;
+    }
+    .footer-section details[open] {
+        border-bottom: 1px solid #fff;
+        padding-bottom: 10px;
+    }
 
 		#current-time {
 			background-color: var(--navy);
@@ -702,7 +717,7 @@
         .collapsible-header.active::after {
             transform: rotate(180deg);
         }
-		
+
 		.status-bars {
 			display: flex;
 			justify-content: center;
@@ -722,12 +737,13 @@
 		}
 
 		.status-level {
-			padding: 2px 5px;
-			border-radius: 3px;
-			cursor: help;
-			transition: all 0.3s ease;
-			position: relative;
-		}
+            padding: 2px 5px;
+            border-radius: 3px;
+            cursor: pointer; /* 클릭 가능하도록 cursor 변경 */
+            transition: all 0.3s ease;
+            position: relative;
+            user-select: none; /* 텍스트 선택 방지 */
+        }
 
 		.status-level .tooltip-text {
 			pointer-events: none; /* 툴팁 자체는 마우스 이벤트 무시 */
@@ -858,7 +874,7 @@
         <span class="title-part2">재난정보</span>
     </h1>
     <p class="subtitle">활동 전 방칙을 숙지해주시기 바랍니다.</p>
-    
+
     <div class="status-bars" aria-label="현재 상태">
         <div class="status-bar">
             <span class="status-label" id="tension-label">긴장도:</span>
@@ -919,11 +935,12 @@
 					<h2 id="channel-intro">채널 소개</h2>
 					<p>우리는 카카오톡 오픈채팅방과 정보아카이브(카페)를 운영중입니다.</p>
 					<ul>
-						<li>정보 공유 전용 <a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1 정보방(카톡)</a>
-						<li>대화 목적 전용 <a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2 대화방(카톡)</a>
-						<li>주제키워드 뉴스 아카이브<a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보 (카페)</a>
+						<li><a href="https://bit.ly/Disinfo1" target="_blank" class="custom-link">세계정세 재난정보 1 정보방(카톡)</a>정보 공유 전용</li>
+						<li><a href="https://bit.ly/DisinfoTalk" target="_blank" class="custom-link">세계정세 재난정보 2 대화방(카톡)</a>일반 대화 전용</li>
+            <li><a href="https://bit.ly/3_debate" target="_blank" class="custom-link">세계정세 재난정보 3 토론방(카톡)</a>토론 목적 전용</li>
+						<li><a href="https://bit.ly/WorldDisinfo" target="_blank" class="custom-link">세계정세 재난정보 (카페)</a>주제키워드 뉴스 아카이브</li>
 					</ul>
-					<p class="bg-very-light-green">모든 정보는 1방에 공유하며 대화는 2방에서 가능합니다.</p>
+					<p class="bg-very-light-green">모든 정보는 1방에 공유하며 일반대화는 2방, 토론은 3방에서 가능합니다.</p>
 					<p class="bg-light-purple">우리채널의 주기능은 <strong>'정보공유'</strong>입니다.</p>
 					<div class="button-container">
 			<div class="button-container">
@@ -958,7 +975,7 @@
         <h2 id="nickname-rules">닉네임 변경 시 참고사항</h2>
 
         <p><span class="subtitle-part1"><strong>입장 즉시</strong></span>
-        <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>으로 1, 2 방 동일하게 수정바랍니다.</p>
+        <span class="tooltip"><span class="text-deep-blue"><strong>호명 가능한 닉네임</strong></span><span class="tooltip-text">실명이 아닌 닉네임을 사용하는 대화방 특성</span></span>으로 1, 2방 동일하게 수정바랍니다.</p>
         <p><span class="tooltip">
               <span class="text-red"><strong>발음 할 수 없는 닉네임</strong></span>
               <span class="tooltip-text">특수문자로만 구성 <br>예시) .(점) 또는 # 등 <br><br>자음/모음으로만 구성<br>zckh, ㄷㄹㅎㅁ</span>
@@ -1090,6 +1107,11 @@
 						<li>국가를 위해 일하는 분들의 용기와 명예를 실추시키는 행위</li>
 					</ul>
 				</div>
+          <ul>
+          <li>모든 활동은 <span class="tooltip"><strong><a href="https://talksafety.kakao.com/policy?lang=ko" target="_blank" rel="noopener noreferrer" class="special-link">카카오톡 운영정책</a></strong><span class="tooltip-text">이용자의 권리 보호와 안전한 서비스 환경 조성을 위한 정책</span></span>과 <span class="tooltip">
+            <strong><a href="https://kona.or.kr/pages/page_65.php" target="_blank" rel="noopener noreferrer" class="special-link">한국온라인신문협회</a></strong><span class="tooltip-text">협회는 비영리적 목적의 일반 개인 네티즌이 한정적 범위에서 직접링크를 사용한다는 조건 하에 저작권자의 허락 없는 자유로운 직접링크를 허용합니다. 단, 비영리, 일반 개인 네티즌, 한정적 범위라는 조건 모두를 만족해야 합니다.</span></span>와
+            <span class="tooltip"><strong>대한민국 헌법</strong>(<span class="tooltip"><strong><a href="https://www.law.go.kr//lsSc.do?section=&menuId=1&subMenuId=15&tabMenuId=81&eventGubun=060101&query=%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EB%B2%95+%EC%A0%9C70%EC%A1%B0#undefined" target="_blank" rel="noopener noreferrer" class="special-link">정보통신망법 제70조</a></strong>
+              <span class="tooltip-text">제70조(벌칙) ① 사람을 비방할 목적으로 정보통신망을 통하여 공공연하게 사실을 드러내어 다른 사람의 명예를 훼손한 자는 3년 이하의 징역 또는 3천만원 이하의 벌금에 처한다. ② 사람을 비방할 목적으로 정보통신망을 통하여 공공연하게 거짓의 사실을 드러내어 다른 사람의 명예를 훼손한 자는 7년 이하의 징역, 10년 이하의 자격정지 또는 5천만원 이하의 벌금에 처한다. ③ 제1항과 제2항의 죄는 피해자가 구체적으로 밝힌 의사에 반하여 공소를 제기할 수 없다.</span></span> 및 관련법률)을 따릅니다.</li></ul>
 				</div>
 
 		    <section class="section" aria-labelledby="chat-rules">
@@ -1281,41 +1303,137 @@
                 <ul>
                     <li>군사/기술 담당자: <span class="gold-shine">우컁, Missile</span></li>
                     <li>생존/기술 담당자: <span class="gold-shine">91</span></li>
-                    <li>속보담당자: <span class="gold-shine">속보만전보</span></li>
-                    <li>재난담당자: <span class="gold-shine">3개국, 전성준, 달빛</span></li>
-                    <li>중동지역 담당자: <span class="gold-shine">아랍 발 자료</span></li>
-                    <li>정보담당자: <span class="gold-shine">ATHENA</span></li>
+                    <li>재난담당자: <span class="gold-shine">전성준, 달빛</span></li>
+                    <li>지진담당자: <span class="gold-shine">로그</span></li>
                     <li>군정보담당자: <span class="gold-shine">뿐빵뿡빵</span></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>함께 운영중인 채널</h3>
                 <ul>
-                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보 1(카톡 정보방)</a></li>
-					          <li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2(카톡 대화방)</a></li>
-				            <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보(카페)</a></li>
+                    <li><a href="https://bit.ly/Disinfo1" target="_blank">세계정세 재난정보 1 정보방(카톡)</a></li>
+					          <li><a href="https://bit.ly/DisinfoTalk" target="_blank">세계정세 재난정보 2 대화방(카톡)</a></li>
+                    <!-- <li><a href="https://bit.ly/3_debate" target="_blank">세계정세 재난정보 3 토론방(카톡)</a></li> -->
+				            <li><a href="https://bit.ly/WorldDisinfo" target="_blank">세계정세 재난정보 아카이브(카페)</a></li>
 					          <li><a href="https://bit.ly/DisinfoNews" target="_blank">세계정세 재난정보(뉴스 시트)</a></li>
-					          <li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li>
-                    <li><a href="https://bit.ly/DisInfoTalkCafe" target="_blank">세계정세 재난정보대화방 (카페,멤버가능)</a></li>
+							  <li><a href="t.me/Dis_Info1" target="_blank">세계정세 재난정보(텔레그램)</a></li>
+							  <li><a href="https://discord.gg/vQrKR6g3" target="_blank">세계정세 재난정보(디스코드)</a></li>
+							  <li><a href="signal.group/#CjQKIFL9raN94OijohjlVtW5j5_bjtkrxAuWxqN4Wq4rdU11EhCP8p5dokCKgXDGX7bEao7b" target="_blank">세계정세 재난정보(시그널)</a></li>
+					          <!-- <li><a href="https://bit.ly/WorldDisInfoCafe" target="_blank">세계정세 재난정보방 (카페,모두가능)</a></li> -->
+                    <!-- <li><a href="https://bit.ly/DisInfoTalkCafe" target="_blank">세계정세 재난정보대화방 (카페,멤버가능)</a></li> -->
                 </ul>
             </div>
 
-			<div class="footer-section">
-				<h3>운영진</h3>
-				<!-- <p class="silver-shine">로켓맨</p>				 -->
-				<p class="silver-shine">달빛</p>
-				<p class="silver-shine">뿐빵뿡빵</p>
-				<p class="silver-shine">91</p>
-				<p class="silver-shine">ATHENA</p>
-				<!-- <p class="silver-shine">신루</p>				 -->
-				<h3>만든이</h3>
+            <div class="footer-section">
+                <h3>운영진</h3>
+                <details>
+                    <summary>1기</summary>
+                    <p class="silver-shine">로켓맨</p>
+                    <p class="silver-shine">뿐빵뿡빵</p>
+                    <p class="silver-shine">91</p>
+                    <p class="silver-shine">ATHENA</p>
+                </details>
+                <p class="silver-shine">달빛</p>
+                <p class="silver-shine">신루</p>
+                <h3>만든이</h3>
                 <p><a href="https://open.kakao.com/o/soZB0STe" class="silver-shine">청소부장</a></p>
             </div>
-        </div>
-        </div>
-    </footer>
 
-    <script>
+
+    <!-- Firebase SDK (비모듈 방식) -->
+
+    <!-- 상태 버튼 로직 -->
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+		import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+        // Firebase 로드 대기
+    window.addEventListener('load', () => {
+        if (typeof firebase === 'undefined') {
+            console.error("Firebase SDK not loaded");
+            return;
+        }
+        console.log("Firebase SDK loaded successfully");
+
+        const firebaseConfig = {
+		  apiKey: "AIzaSyAqNmXCTw5aB97pKFR5cf130rGxlTRbexY",
+		  authDomain: "worldinfo-intro.firebaseapp.com",
+		  projectId: "worldinfo-intro",
+		  storageBucket: "worldinfo-intro.firebasestorage.app",
+		  messagingSenderId: "983904860353",
+		  appId: "1:983904860353:web:25a0b8ce911816349cbc40",
+		  measurementId: "G-9X30K4LY99"
+		};
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // 상태 버튼 로직
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusLevels = document.querySelectorAll('.status-level');
+            const CLICK_WINDOW = 1000;
+
+            statusLevels.forEach(level => {
+                let clickCount = 0;
+                let lastClickTime = 0;
+
+                level.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const currentTime = Date.now();
+                    const timeDiff = currentTime - lastClickTime;
+
+                    console.log("Click detected, count:", clickCount + 1, "timeDiff:", timeDiff);
+
+                    if (timeDiff > CLICK_WINDOW) {
+                        clickCount = 1;
+                    } else {
+                        clickCount++;
+                    }
+
+                    lastClickTime = currentTime;
+
+                    if (clickCount === 3) {
+                        console.log("3 clicks detected, updating status...");
+                        updateStatus(level);
+                        clickCount = 0;
+                    }
+                });
+            });
+
+            function updateStatus(selectedLevel) {
+                const levelText = selectedLevel.getAttribute('data-level');
+                const isTension = selectedLevel.closest('.status-bar').querySelector('#tension-label');
+                db.ref('status').once('value').then(snapshot => {
+                    const status = snapshot.val() || { tension: "평시", congestion: "원활" };
+                    const newStatus = {
+                        tension: isTension ? levelText : status.tension,
+                        congestion: !isTension ? levelText : status.congestion
+                    };
+                    console.log("Updating Firebase with:", newStatus);
+                    db.ref('status').set(newStatus)
+                        .then(() => {
+                            alert(`상태가 ${isTension ? '긴장도' : '혼잡도'} ${levelText}(으)로 변경되었습니다.`);
+                        })
+                        .catch(error => {
+                            console.error("Status update failed:", error);
+                            alert("상태 변경에 실패했습니다.");
+                        });
+                });
+            }
+
+            db.ref('status').on('value', snapshot => {
+                const status = snapshot.val() || { tension: "평시", congestion: "원활" };
+                document.querySelectorAll('.status-level').forEach(level => {
+                    const levelText = level.getAttribute('data-level');
+                    if ((level.closest('.status-bar').querySelector('#tension-label') && levelText === status.tension) ||
+                        (level.closest('.status-bar').querySelector('#congestion-label') && levelText === status.congestion)) {
+                        level.classList.add('active');
+                    } else {
+                        level.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+
 	function scrollToTop() {
 		window.scrollTo({
 			top: 0,
@@ -1496,7 +1614,8 @@
 			let iframe = document.getElementById('modalIframe');
 
 			modal.style.display = 'block';
-			iframe.src = filePath;
+			<!-- iframe.src = filePath; -->
+			iframe.src = `https://worldinfo-intro.web.app/${filePath}`; // 절대 경로로 변경
 		}
 
 		function closeModal() {
@@ -1707,10 +1826,10 @@
 		  .catch(error => {
 			console.error('Error loading cooperation section:', error);
 		  });
-		  
+
 document.addEventListener('DOMContentLoaded', function() {
     const statusLevels = document.querySelectorAll('.status-level');
-    
+
     statusLevels.forEach(level => {
         // 툴팁 추가
         level.classList.add('tooltip');
@@ -1721,7 +1840,7 @@ document.addEventListener('DOMContentLoaded', function() {
             level.appendChild(tooltipText);
         }
         tooltipText.innerHTML = getStatusDescription(level.dataset.level);
-        
+
         // 클릭 이벤트 완전 차단
         level.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1745,84 +1864,94 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getStatusDescription(level) {
-    const descriptions = {
-		"평시": {
-			title: "평시",
-			items: [
-				"일상적인 토론과 정보 공유가 이루어지는 상황",
-				"자유로운 의견 교환",
-				"기본 방칙대로 운영"
-			]
-		},
-	
-        "원활": {
-            title: "원활",
-            items: ["대체로 방칙이 준수되며 대화 흐름이 원활한 상태"]
-        },
-        "혼잡": {
-            title: "혼잡",
-            items: [
-                "방칙 미준수가 3-5회로 빈번하게 발생하는 상태",
-                "대화 속도가 빨라지거나 다수 주제가 동시에 진행되는 상태",
-                "채널 주제와 무관한 대화의 빈도가 높아진 상태",
-                "관리자의 개입으로 대화 유도"
-            ]
-        },
-        "비상": {
-            title: "비상",
-            items: [
-                "방칙 미준수가 잦아 방의 질서가 어지러운 상태",
-                "특정 상황으로 인원 유입이 많아 혼란이 가중된 상황",
-                "일시적 채팅 제한 실시",
-                "긴급 공지를 통한 상황 안내 및 대처 요청"
-            ]
-        },
-        "주의": {
-            title: "주의",
-            items: [
-                "군사 훈련/외교적 마찰, 국가위기 등 긴장 고조 상황",
-                "사실 확인이 필요한 정보에 대한 검증 강화",
-                "출처가 불분명한 정보에 대해 주의 표시 조치",
-                "비공식채널 및 커뮤니티 정보 경계",
-                "방칙 위반 시 주의 및 즉시 경고"
-            ]
-        },
-        "경계": {
-            title: "경계",
-            items: [
-                "군사적 충돌 및 국가위기 등 가능성이 높아지는 상황",
-                "확인된 정보 위주로 공유 권장",
-                "불안조장 및 선동적인 활동에 대한 모니터링 강화",
-                "미확인 정보나 과도한 추측성 발언 자제 요청",
-                "방칙 위반 시 즉시 경고",
-                "비공식채널 및 커뮤니티 글 제한(허위 및 혼란방지)",
-                "혼잡도[혼잡] 관리자의 개입으로 대화 유도"
-            ]
-        },
-        "위기": {
-            title: "위기",
-            items: [
-                "실제 전투나 군사적 충돌 등 국가위기가 발생한 상황",
-                "공식채널 정보 우선 공유",
-                "미확인 정보나 과도한 추측성 발언 제한",
-                "비공식채널 및 커뮤니티 글 제한(허위 및 혼란방지)",
-                "방칙 위반 시 즉시 경고 또는 퇴장",
-                "혼잡도[비상]일시적 채팅 제한/공지로 상황통제"
-            ]
+            const descriptions = {
+                "평시": {
+                    title: "평시",
+                    items: [
+                        "일상적인 토론과 정보 공유가 이루어지는 상황",
+                        "자유로운 의견 교환",
+                        "기본 방칙대로 운영"
+                    ]
+                },
+                "원활": {
+                    title: "원활",
+                    items: ["대체로 방칙이 준수되며 대화 흐름이 원활한 상태"]
+                },
+                "혼잡": {
+                    title: "혼잡",
+                    items: [
+                        "방칙 미준수가 3-5회로 빈번하게 발생하는 상태",
+                        "대화 속도가 빨라지거나 다수 주제가 동시에 진행되는 상태",
+                        "채널 주제와 무관한 대화의 빈도가 높아진 상태",
+                        "관리자의 개입으로 대화 유도"
+                    ]
+                },
+                "비상": {
+                    title: "비상",
+                    items: [
+                        "방칙 미준수가 잦아 방의 질서가 어지러운 상태",
+                        "특정 상황으로 인원 유입이 많아 혼란이 가중된 상황",
+                        "일시적 채팅 제한 실시",
+                        "긴급 공지를 통한 상황 안내 및 대처 요청"
+                    ]
+                },
+                "주의": {
+                    title: "주의",
+                    items: [
+                        "군사 훈련/외교적 마찰, 국가위기 등 긴장 고조 상황",
+                        "사실 확인이 필요한 정보에 대한 검증 강화",
+                        "출처가 불분명한 정보에 대해 주의 표시 조치",
+                        "비공식채널 및 커뮤니티 정보 경계",
+                        "방칙 위반 시 주의 및 즉시 경고"
+                    ]
+                },
+                "경계": {
+                    title: "경계",
+                    items: [
+                        "군사적 충돌 및 국가위기 등 가능성이 높아지는 상황",
+                        "확인된 정보 위주로 공유 권장",
+                        "불안조장 및 선동적인 활동에 대한 모니터링 강화",
+                        "미확인 정보나 과도한 추측성 발언 자제 요청",
+                        "방칙 위반 시 즉시 경고",
+                        "비공식채널 및 커뮤니티 글 제한(허위 및 혼란방지)",
+                        "혼잡도[혼잡] 관리자의 개입으로 대화 유도"
+                    ]
+                },
+                "위기": {
+                    title: "위기",
+                    items: [
+                        "실제 전투나 군사적 충돌 등 국가위기가 발생한 상황",
+                        "공식채널 정보 우선 공유",
+                        "미확인 정보나 과도한 추측성 발언 제한",
+                        "비공식채널 및 커뮤니티 글 제한(허위 및 혼란방지)",
+                        "방칙 위반 시 즉시 경고 또는 퇴장",
+                        "혼잡도[비상]일시적 채팅 제한/공지로 상황통제"
+                    ]
+                }
+            };
+            const status = descriptions[level];
+            if (!status) return "설명 없음";
+
+            return `
+                <!-- <h3>${status.title}</h3> -->
+                <ul>
+                    ${status.items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
         }
-    };
 
-    const status = descriptions[level];
-    if (!status) return "설명 없음";
-
-    return `
-        <!-- <h3>${status.title}</h3> -->
-        <ul>
-            ${status.items.map(item => `<li>${item}</li>`).join('')}
-        </ul>
-    `;
-}
-
-
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusLevels = document.querySelectorAll('.status-level');
+            statusLevels.forEach(level => {
+                let tooltipText = level.querySelector('.tooltip-text');
+                if (!tooltipText) {
+                    tooltipText = document.createElement('span');
+                    tooltipText.classList.add('tooltip-text');
+                    level.appendChild(tooltipText);
+                }
+                tooltipText.innerHTML = getStatusDescription(level.dataset.level);
+            });
+        });
+    });
 </script>
 </html>
