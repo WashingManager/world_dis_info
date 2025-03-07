@@ -1340,20 +1340,13 @@
             </div>
 
 
-    <!-- Firebase SDK (비모듈 방식) -->
-
-    <!-- 상태 버튼 로직 -->
-	<script type="module">
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-		import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
-        // Firebase 로드 대기
-    window.addEventListener('load', () => {
-        if (typeof firebase === 'undefined') {
-            console.error("Firebase SDK not loaded");
-            return;
-        }
-        console.log("Firebase SDK loaded successfully");
-
+    <!-- Firebase SDK 추가 -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <!-- 상태 버튼 및 페이지 로직 -->
+    <script>
+        // Firebase 초기화
         const firebaseConfig = {
 		  apiKey: "AIzaSyAqNmXCTw5aB97pKFR5cf130rGxlTRbexY",
 		  authDomain: "worldinfo-intro.firebaseapp.com",
@@ -1365,73 +1358,77 @@
 		};
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
+        const auth = firebase.auth();
 
-        // 상태 버튼 로직
+        // 상태 초기화 및 실시간 업데이트
         document.addEventListener('DOMContentLoaded', () => {
-            const statusLevels = document.querySelectorAll('.status-level');
-            const CLICK_WINDOW = 1000;
-
-            statusLevels.forEach(level => {
-                let clickCount = 0;
-                let lastClickTime = 0;
-
-                level.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const currentTime = Date.now();
-                    const timeDiff = currentTime - lastClickTime;
-
-                    console.log("Click detected, count:", clickCount + 1, "timeDiff:", timeDiff);
-
-                    if (timeDiff > CLICK_WINDOW) {
-                        clickCount = 1;
-                    } else {
-                        clickCount++;
-                    }
-
-                    lastClickTime = currentTime;
-
-                    if (clickCount === 3) {
-                        console.log("3 clicks detected, updating status...");
-                        updateStatus(level);
-                        clickCount = 0;
-                    }
-                });
+            const statusRef = db.ref('status');
+            statusRef.on('value', (snapshot) => {
+                const status = snapshot.val() || { tension: "평시", congestion: "원활" };
+                updateUI(status);
             });
 
-            function updateStatus(selectedLevel) {
-                const levelText = selectedLevel.getAttribute('data-level');
-                const isTension = selectedLevel.closest('.status-bar').querySelector('#tension-label');
-                db.ref('status').once('value').then(snapshot => {
-                    const status = snapshot.val() || { tension: "평시", congestion: "원활" };
-                    const newStatus = {
-                        tension: isTension ? levelText : status.tension,
-                        congestion: !isTension ? levelText : status.congestion
-                    };
-                    console.log("Updating Firebase with:", newStatus);
-                    db.ref('status').set(newStatus)
-                        .then(() => {
-                            alert(`상태가 ${isTension ? '긴장도' : '혼잡도'} ${levelText}(으)로 변경되었습니다.`);
-                        })
-                        .catch(error => {
-                            console.error("Status update failed:", error);
-                            alert("상태 변경에 실패했습니다.");
-                        });
-                });
-            }
-
-            db.ref('status').on('value', snapshot => {
-                const status = snapshot.val() || { tension: "평시", congestion: "원활" };
-                document.querySelectorAll('.status-level').forEach(level => {
-                    const levelText = level.getAttribute('data-level');
-                    if ((level.closest('.status-bar').querySelector('#tension-label') && levelText === status.tension) ||
-                        (level.closest('.status-bar').querySelector('#congestion-label') && levelText === status.congestion)) {
-                        level.classList.add('active');
-                    } else {
-                        level.classList.remove('active');
-                    }
+            // 버튼 클릭 이벤트
+            const statusLevels = document.querySelectorAll('.status-level');
+            statusLevels.forEach(level => {
+                level.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    handleStatusChange(level);
                 });
             });
         });
+
+        // UI 업데이트 함수
+        function updateUI(status) {
+            document.querySelectorAll('.status-level').forEach(level => {
+                const levelText = level.getAttribute('data-level');
+                const isTension = level.closest('.status-bar').querySelector('#tension-label');
+                if ((isTension && levelText === status.tension) || 
+                    (!isTension && levelText === status.congestion)) {
+                    level.classList.add('active');
+                } else {
+                    level.classList.remove('active');
+                }
+            });
+        }
+
+        // 상태 변경 처리 (3번 클릭 및 관리자 인증)
+        let clickCount = 0;
+        let lastClickTime = 0;
+        const CLICK_WINDOW = 1000;
+
+        function handleStatusChange(selectedLevel) {
+            const currentTime = Date.now();
+            const timeDiff = currentTime - lastClickTime;
+
+            if (timeDiff > CLICK_WINDOW) clickCount = 0;
+            clickCount++;
+            lastClickTime = currentTime;
+
+            if (clickCount === 3) {
+                auth.signInAnonymously().then(() => {
+                    const user = auth.currentUser;
+                    if (user && user.uid === 'YOUR_ADMIN_UID') { // 관리자 UID 확인
+                        const levelText = selectedLevel.getAttribute('data-level');
+                        const isTension = selectedLevel.closest('.status-bar').querySelector('#tension-label');
+                        const statusRef = db.ref('status');
+                        statusRef.once('value').then(snapshot => {
+                            const status = snapshot.val() || { tension: "평시", congestion: "원활" };
+                            const newStatus = {
+                                tension: isTension ? levelText : status.tension,
+                                congestion: !isTension ? levelText : status.congestion
+                            };
+                            statusRef.set(newStatus)
+                                .then(() => alert(`상태가 ${isTension ? '긴장도' : '혼잡도'} ${levelText}(으)로 변경되었습니다.`))
+                                .catch(error => alert("상태 변경 실패: " + error.message));
+                        });
+                    } else {
+                        alert("관리자만 상태를 변경할 수 있습니다.");
+                    }
+                }).catch(error => alert("인증 오류: " + error.message));
+                clickCount = 0;
+            }
+        }
 
 
 	function scrollToTop() {
@@ -1442,9 +1439,8 @@
 	}
 
 	function scrollToFooter() {
-		const footer = document.querySelector('footer');
-		footer.scrollIntoView({ behavior: 'smooth' });
-	}
+            document.querySelector('footer').scrollIntoView({ behavior: 'smooth' });
+        }
 
 	// 스크롤 이벤트 리스너 추가
 	window.addEventListener('scroll', function() {
@@ -1609,38 +1605,31 @@
 			const footer = document.querySelector('footer');
 			footer.scrollIntoView({ behavior: 'smooth' });
 		}
-		function openModal(filePath) {
-			let modal = document.getElementById('myModal');
-			let iframe = document.getElementById('modalIframe');
-
-			modal.style.display = 'block';
-			<!-- iframe.src = filePath; -->
-			iframe.src = `https://worldinfo-intro.web.app/${filePath}`; // 절대 경로로 변경
-		}
+		 // 모달, 툴팁 등 기존 로직 유지
+        function openModal(filePath) {
+            let modal = document.getElementById('myModal');
+            let iframe = document.getElementById('modalIframe');
+            modal.style.display = 'block';
+            iframe.src = `https://washingmanager.github.io/world_dis_info/${filePath}`;
+        }
 
 		function closeModal() {
-			let modal = document.getElementById('myModal');
-			let iframe = document.getElementById('modalIframe');
-
-			// 모달 내용을 즉시 숨김
-			modal.style.opacity = '0';
-			modal.style.transition = 'opacity 0.5s';
-
-			// 2초 후에 모달을 완전히 닫고 iframe 소스를 지움
-			setTimeout(() => {
-				modal.style.display = 'none';
-				iframe.src = '';
-				modal.style.opacity = '1'; // 다음 열림을 위해 불투명도 초기화
-			}, 2000);
-		}
+            let modal = document.getElementById('myModal');
+            let iframe = document.getElementById('modalIframe');
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                modal.style.display = 'none';
+                iframe.src = '';
+                modal.style.opacity = '1';
+            }, 500);
+        }
 
 		// 모달 외부 클릭시 닫기
 		window.onclick = function(event) {
-			let modal = document.getElementById('myModal');
-			if (event.target == modal) {
-				closeModal();
-			}
-		}
+            let modal = document.getElementById('myModal');
+            if (event.target == modal) closeModal();
+        };
 
     document.addEventListener('DOMContentLoaded', function() {
         const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
